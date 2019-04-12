@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--link to bootstrap stylesheet-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
@@ -16,7 +16,34 @@
     <!--***MATT'S CODE *** ONLY MATT TYPES HERE ***-->
     <!--Weather info shows up here-->
     <!--DO NOT EDIT CODE HERE, copy from things-to-do's header and paste here!-->
+
+    <div class="myListContainer">
+
     <header class="row">
+
+        <div class="col-md-3">
+            <!--icon for weather (sun/cloud/etc)-->
+            <img id="weather-icon" src="assets/images/sunny.jpg" alt="sunny">
+        </div>
+        <div class="col-md-3">
+            <!--temperature high and low-->
+            <span id="temp-hi"></span> /Temp HI & LOW/ <span id="temp-lo"></span>
+        
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+            <!--casual language description of the temperature, like "a bit chilly" or "way hot"-->
+            <div id="temp-quote" class="col-md-12">
+        
+            </div>
+        </div>
+    <div class="row">
+        <!--casual language description of the weather, like "chance of rain" or "muggy" or "don't forget the sunscreen!"-->
+        <div id="weather-quote" class="col-md-12">
+        
+        </div>
+    </div>
+</div>
 
     </header>
     <!--*** END MATT'S CODE ***-->
@@ -33,13 +60,15 @@
         </nav>
 
         <div id="my-list-results">
-
+            HERE'S MY RESULTS!
         </div>
 
     </div>
     <footer>
 
     </footer>
+
+</div>
 
 
     <!--link to jquery-->
