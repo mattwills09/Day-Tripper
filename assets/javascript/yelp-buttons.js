@@ -143,7 +143,7 @@ $(document).ready(function () {
       var name = name;
       var btn = $("<button>");
       btn.text(name);
-      btn.attr({"id":name,"data-selected":"false"});//set default to data-selected = false
+      btn.attr({"id":name,"data-selected":"false","class":"btn btn-outline-primary m-1"});//set default to data-selected = false
   
       //add click listeners to each button
       btn.on("click", function(){
@@ -156,7 +156,7 @@ $(document).ready(function () {
           
           $(this).attr({"data-selected":"true"}); //updated selected status
         
-          $(this).addClass("selected");  //add the selected class
+          $(this).addClass("btn-primary text-white");  //add the selected class
         }
   
         //if the button was already selected, unselect it and remove it from the chosenCategories
@@ -168,13 +168,13 @@ $(document).ready(function () {
         
           $(this).attr("data-selected","false");  //update selected status
           
-          $(this).removeClass("selected"); //remove the selected class
+          $(this).removeClass("btn-primary text-white"); //remove the selected class
         }
   
   
         });
   
-      $("#results").append(btn); //add to results div 
+      $("#categories-1").append(btn); //add to results div 
     }
   
     var test = ["garden","zorbing","museum"];
