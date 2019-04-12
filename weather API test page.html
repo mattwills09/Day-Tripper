@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Weather API Test Page - Day Tripper</title>
+
+<style>
+    .suggestion-day, .suggestion-night {
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:16pt;
+        color:darkred;
+    }
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <h1>City Weather Search (by Zipcode)</h1>
+            
+    <form id="city-form">
+        <label for="city-input">Search for a City</label>
+        <input type="text" id="city-input" value="Enter Zip Code.." onfocus="this.value=''"><br>
+            
+        <input id="add-city" type="submit" value="Get Weather!">
+    </form><br>
+
+
+<div class="city"></div>
+
+<h2>3-Hour Forecast</h2>
+    <div class="temp3"></div>
+    <div class="conditions3"></div>
+    <div class="wind3"></div>
+    <div class="humidity3"></div>
+    <div class="temp3max"></div>
+    <div class="temp3min"></div><br>
+
+    <div class="suggestion-day"></div>
+
+<h2>6-Hour Forecast</h2>
+    <div class="temp6"></div>
+    <div class="conditions6"></div>
+    <div class="wind6"></div>
+    <div class="humidity6"></div>
+    <div class="temp6max"></div>
+    <div class="temp6min"></div><br>
+
+    <div class="suggestion-night"></div>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+// API KEY = 6832cd13112f3ff58acaee5e7646c57a
+
+var citySearch = $("city-input").val();
+
+// CURRENT WEATHER
+// var queryURL = "https://api.openweathermap.org/data/2.5/weather?zip=19125,us&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a"
+
+//------------------------------------------------------------
+
+$("#add-city").on("click", function(event) {
+    event.preventDefault();
+
+    var citySearch = $("#city-input").val();
+    
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + citySearch + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+        console.log(response);
+
+        $(".city").html("<h1>" + response.city.name + " Weather Details</h1>");
+        $(".temp3").text("Temperature (F) For Next 3 Hours: " + response.list[0].main.temp);
+        $(".conditions3").text("Current Conidtions: " + response.list[0].weather[0].description);
+        $(".wind3").text("Wind Speed: " + response.list[0].wind.speed + " mph");
+        $(".humidity3").text("Humidity: " + response.list[0].main.humidity);
+        $(".temp3max").text("Next 3 Hours - Max Temperature (F): " + response.list[0].main.temp_max);
+        $(".temp3min").text("Next 3 Hours - Min Temperature (F): " + response.list[0].main.temp_min);
+
+        $(".temp6").text("Forecasted Temperature (F) in 6 Hours: " + response.list[1].main.temp);
+        $(".conditions6").text("Current Conidtions: " + response.list[1].weather[0].description);
+        $(".wind6").text("Wind Speed: " + response.list[1].wind.speed + " mph");
+        $(".humidity6").text("Humidity: " + response.list[1].main.humidity);
+        $(".temp6max").text("Next 6 Hours - Max Temperature (F): " + response.list[1].main.temp_max);
+        $(".temp6min").text("Next 6 Hours - Min Temperature (F): " + response.list[1].main.temp_min);
+
+        //------------------------------------------------------------
+
+        var suggestionDay = response.list[0].main.temp_max;
+
+        if (suggestionDay >= 60)
+            $(".suggestion-day").text("Today looks like a SHORTS day!");
+        else
+            $(".suggestion-day").text("Nope, today looks like PANTS weather.. bummer");
+
+        var suggestionNight = response.list[1].main.temp_max;
+
+        if (suggestionNight >= 60)
+            $(".suggestion-night").text("Tonight looks like a SHORTS night!");
+        else
+            $(".suggestion-night").text("Nope, tonight looks like PANTS weather.. bummer");
+
+        //------------------------------------------------------------
+        
+        console.log(suggestion);
+        console.log("Temperature (F): " + response.list[0].main.temp);
+        console.log("Current Conidtions: " + response.list[0].weather[0].description);
+        console.log("Wind Speed: " + response.list[0].wind.speed + " mph");
+        console.log("Next 3 Hours - Max Temperature (F): " + response.list[0].main.temp_max);
+        console.log("Next 3 Hours - Min Temperature (F): " + response.list[0].main.temp_min);
+        console.log("Next 6 Hours - Max Temperature (F): " + response.list[0].main.temp_max);
+        console.log("Next 6 Hours - Min Temperature (F): " + response.list[0].main.temp_min);
+
+});
+});
+
+
+</script>
+
+</body>
+</html>

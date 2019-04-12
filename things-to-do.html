@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <!--set viewport for responsive design-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--link to bootstrap stylesheet-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+    <!--/////////-->
+    <!--***MATT'S CODE *** ONLY MATT TYPES HERE ***-->
+    <!--Weather info shows up here-->
+    <!--THIS PORTION IS IDENTICAL ON MY-LIST, so be sure to paste your updated code there too!-->
+    <div class="thingsContainer">
+
+    <header class="row">
+            <div class="col-md-3">
+                <!--icon for weather (sun/cloud/etc)-->
+                <img id="weather-icon" src="assets/images/sunny.jpg" alt="sunny">
+            </div>
+            <div class="col-md-3">
+                <!--temperature high and low-->
+                <span id="temp-hi"></span> /Temp HI & LOW/ <span id="temp-lo"></span>
+    
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <!--casual language description of the temperature, like "a bit chilly" or "way hot"-->
+                    <div id="temp-quote" class="col-md-12">
+    
+                    </div>
+                </div>
+                <div class="row">
+                    <!--casual language description of the weather, like "chance of rain" or "muggy" or "don't forget the sunscreen!"-->
+                    <div id="weather-quote" class="col-md-12">
+    
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!--*** END MATT'S CODE ***-->
+        <!--/////////-->
+
+
+    <!--main content, displays yelp API results-->
+    <div class="container">
+        <nav>
+            <!--link to my list -->
+            <a href="./my-list.html">My List</a>
+            <!--allow user to update locations-->
+            <!--logout-->
+
+            <a class="btn btn-outline-success" href="#" role="button">New Location</a>
+            <a class="btn btn-outline-success" href="#" role="button">More Options</a>
+            <a class="btn btn-outline-success" href="#" role="button">My List</a>
+        </nav>
+        
+        <!--show list of YELP results; populates dynamically using Al's code-->
+        <div id="results">
+
+        </div>
+
+    </div>
+</div>
+
+
+    <!--link to jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--link to bootstrap javascript-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!--link to firebase-->
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <!--link to our javascript-->
+    <script src="assets/app.js"></script>
+</body>
+
+</html>
