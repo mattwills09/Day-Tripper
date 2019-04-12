@@ -14,21 +14,23 @@ $.ajax({
     var suggestionDay = response.list[0].main.temp;
 
     if (suggestionDay >= 60)
-        $(".suggestDay").text("Woot!  Looks like a SHORTS today!");
+        $(".suggestDay").text("Woot!  Looks like SHORTS today!");
     else
         $(".suggestDay").text("Nope, today looks like PANTS weather.. bummer");
 
     //-----------------------------------------------------------------
 
-    // var suggestionImage = response.list[0].weather[0].description;
-    
-    // if(suggestionImage == sun) {
-    //     document.getElementById("img").src = "https://www.w3schools.com/css/trolltunga.jpg";
+    var cloudCover = response.list[0].clouds.all;
 
-    //  } else {
-    //     document.getElementById("img").src = "http://wallpaper-         gallery.net/images/image/image-13.jpg";
-    // }
-
+    if(cloudCover >= 75) {
+        $("#welcomeWeather").attr("src", "assets/images/cloudy.png");
+     }
+    if(cloudCover >= 50) {
+        $("#welcomeWeather").attr("src", "assets/images/partly-cloudy.png");
+     }
+    else {
+        $("#welcomeWeather").attr("src", "assets/images/sunny.jpg");
+    }
 
 
 });
