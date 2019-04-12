@@ -8,6 +8,7 @@ $.ajax({
     console.log(response);
 
     $(".temp3").text("Current Temperature (F): " + response.list[0].main.temp);
+    $(".conditions").text("Current Conditions: " + response.list[0].weather[0].description);
 
     //-----------------------------------------------------------------
 
@@ -21,11 +22,17 @@ $.ajax({
     //-----------------------------------------------------------------
 
     var cloudCover = response.list[0].clouds.all;
+    var rainChance = response.list[0].weather[0].main;
 
-    if(cloudCover >= 75) {
+    console.log(rainChance);
+
+    if (rainChance == "Rain") {
+        $("#welcomeWeather").attr("src", "assets/images/rainy.png");  
+    }
+    else if(cloudCover >= 75) {
         $("#welcomeWeather").attr("src", "assets/images/cloudy.png");
      }
-    if(cloudCover >= 50) {
+    else if(cloudCover >= 50) {
         $("#welcomeWeather").attr("src", "assets/images/partly-cloudy.png");
      }
     else {
