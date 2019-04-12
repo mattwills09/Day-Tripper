@@ -7,13 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--link to bootstrap stylesheet-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="containerIndex">
+        <h2>enter zipcode</h2>
+
+        <form id="location-form">
+            <label for="zip-input"></label>
+            <input type="text" id="city-input" value="zip code.." onfocus="this.value=''"><br><br>
+
+            <h3>- or -</h3>
+            <br>
+                    
+            <input id="add-city" type="submit" class="btn btn-warning" value="get location!">
+        </form>
+
 
         <!--JEN'S CODE *** ONLY JEN TYPES HERE ***-->
             <!--login form-->
@@ -34,6 +46,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <!--link to our javascript-->
     <script src="assets/app.js"></script>
+
 </body>
 
 </html>

@@ -1,0 +1,38 @@
+* {
+    box-sizing:border-box;
+}
+
+body {
+
+}
+
+.jumbotron, .thingsContainer, .myListContainer {
+    margin:auto;
+    background-color:white;
+    border:2px solid green;
+    width:1200px;
+}
+
+.welcomeWeather, #weather-icon {
+    width:100px;
+    height:100px;
+    float:right;
+}
+
+.containerIndex {
+    text-align:center;
+    margin:auto;
+    padding:10px;
+    margin-top:100px;
+}
+
+.containerWelcome {
+    text-align:center;
+    margin:auto;
+    padding:10px;
+    margin-top:30px;
+}
+
+.welcomeButtons {
+    text-align:center;
+}

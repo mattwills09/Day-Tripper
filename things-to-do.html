@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--link to bootstrap stylesheet-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
@@ -16,14 +16,16 @@
     <!--***MATT'S CODE *** ONLY MATT TYPES HERE ***-->
     <!--Weather info shows up here-->
     <!--THIS PORTION IS IDENTICAL ON MY-LIST, so be sure to paste your updated code there too!-->
+    <div class="thingsContainer">
+
     <header class="row">
             <div class="col-md-3">
                 <!--icon for weather (sun/cloud/etc)-->
-                <img id="weather-icon" src="" alt="">
+                <img id="weather-icon" src="assets/images/sunny.jpg" alt="sunny">
             </div>
             <div class="col-md-3">
                 <!--temperature high and low-->
-                <span id="temp-hi"></span> / <span id="temp-lo"></span>
+                <span id="temp-hi"></span> /Temp HI & LOW/ <span id="temp-lo"></span>
     
             </div>
             <div class="col-md-6">
@@ -41,6 +43,7 @@
                 </div>
             </div>
         </header>
+
         <!--*** END MATT'S CODE ***-->
         <!--/////////-->
 
@@ -52,6 +55,10 @@
             <a href="./my-list.html">My List</a>
             <!--allow user to update locations-->
             <!--logout-->
+
+            <a class="btn btn-outline-success" href="#" role="button">New Location</a>
+            <a class="btn btn-outline-success" href="#" role="button">More Options</a>
+            <a class="btn btn-outline-success" href="#" role="button">My List</a>
         </nav>
         
         <!--show list of YELP results; populates dynamically using Al's code-->
@@ -60,6 +67,7 @@
         </div>
 
     </div>
+</div>
 
 
     <!--link to jquery-->
