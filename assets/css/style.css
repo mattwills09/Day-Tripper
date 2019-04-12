@@ -2,10 +2,6 @@
     box-sizing:border-box;
 }
 
-body {
-
-}
-
 .jumbotron, .thingsContainer, .myListContainer {
     margin:auto;
     background-color:white;
