@@ -4,102 +4,88 @@
 <head>
 
 
-    <meta charset="UTF-8">
-    <title>Day Tripper</title>
+  <meta charset="UTF-8">
+  <title>Day Tripper</title>
 
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- Bootstrap CDN-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- Bootstrap CDN-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
 
-    <link rel="stylesheet" href="assets\css\style.css">
+  <link rel="stylesheet" href="assets\css\style.css">
 
 </head>
 
 <body>
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <form>   
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp"
-                            placeholder="Enter email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="textPassword" placeholder="Password">
-                    </div>
-
-                    <button id="btnLogin" type="submit" class="btn btn-action">Log in</button>
-                    <button id="btnSignup" type="submit" class="btn btn-secondary">Sign up</button>
-                     <button id="btnLogout" type="submit" class="btn btn-secondary">Log Out</button>
-               </form>
-            </div>
-        </div>
-    </div>
-
-      <!-- Modal Alert -->
-      <div class="modal fade" id="alert" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Hold On...</h4>
-            </div>
-            <div class="modal-body">
-              <p>Let's get you Signed-Up First</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-      
-    </div>  
-
-    <div class="modal fade" id="sign-in" role="dialog">
-      <div class="modal-dialog">
-      
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Yeah</h4>
-          </div>
-          <div class="modal-body">
-            <p>You're signed up, let's login in now</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <div id="login-form" class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div id="alertArea" class="invisible">
+          <div id="alert" class="alert alert-primary" role="alert">
           </div>
         </div>
-        
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp"
+              placeholder="Enter email">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="textPassword" placeholder="Password">
+          </div>
+
+          <button id="btnLogin" type="submit" class="btn btn-action">Log in</button>
+          <button id="btnSignup" type="submit" class="btn btn-secondary">Sign up</button>
+          <span id="logout" class="invisible">
+            <button id="btnLogout" type="submit" class="btn btn-action">Log Out</button>
+          </span>
+        </form>
       </div>
     </div>
-    
-  </div>  
+  </div>
 
+  
+  <!-- Modal -->
+  <div class="modal fade" id="zipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Let's Plan a Day Trip!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="zipcode">Where to?</label>
+                <input type="text" class="form-control" id="zip-input" placeholder="Zipcode">
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btnGo" type="button" class="btn btn-primary">Let's Go!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+</div>
 
 
 </body>
 
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="assets/javascript/app.js"></script>
-    <script src="assets\javascript\login.js"></script>
+<script src="assets\javascript\login.js"></script>
 
 </body>
 
