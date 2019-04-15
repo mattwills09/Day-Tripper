@@ -1,3 +1,41 @@
+//--------------------------! Logout Button !--------------------------
+$("#btnLogout").on("click", function (event) {
+    event.preventDefault();
+    firebase.auth().signOut()
+        .then(function () {
+            window.location.href = "index.html";
+        })
+        .catch(function (error) {
+            onsole.log(error);
+        })
+});
+
+//-------------------------! Initialize Firebase !--------------------
+var config = {
+    apiKey: "AIzaSyDMrNIM1I6SatTgZfcEcc6rDUsGCNOmBNg",
+    authDomain: "login-test-fe7e7.firebaseapp.com",
+    databaseURL: "https://login-test-fe7e7.firebaseio.com",
+    projectId: "login-test-fe7e7",
+    storageBucket: "login-test-fe7e7.appspot.com",
+    messagingSenderId: "1052759447469"
+};
+
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+//Create Firebase event for adding to the database and a row in the html when a user adds an entry
+database.ref().on("child_added", function (childSnapshot) {
+    // storing the snapshot.val() in a variable for convenience
+    console.log(childSnapshot.val());
+
+    //Stores everything into a variable
+    userZip = childSnapshot.val().zip;
+    console.log("inside "+userZip);
+    zipSearch(userZip);
+
+});
+
 function processData(response){
     $(".city").text(response.city.name + "'s Current Weather");
     $(".temp3").text("Current Temperature (F): " + response.list[0].main.temp);
@@ -62,7 +100,6 @@ function processData(response){
 
 //-----------------ZIP CODE API QUERY------------------------
 
-zipSearch(99501);
 
 function zipSearch(zipCode){
 var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
@@ -71,7 +108,7 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode
     url: queryURL,
     method: "GET"
     }).then(function(response) {
-
+        console.log("ajax call");
         processData(response);
         console.log(response);
 
