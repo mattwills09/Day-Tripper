@@ -1,5 +1,18 @@
 $(document).ready(function () {
 
+  //--------------------------! Logout Button !--------------------------
+$("#btnLogout").on("click", function (event) {
+  event.preventDefault();
+  firebase.auth().signOut()
+      .then(function () {
+          window.location.href = "index.html";
+      })
+      .catch(function (error) {
+          console.log(error);
+      })
+});
+
+zipSearch(19010);
   //SHARED GLOBAL VARIABLES
   var zipcode = "";
   var lat = "";
@@ -250,7 +263,6 @@ $(document).ready(function () {
 
 //-----------------ZIP CODE API QUERY------------------------
 
-zipSearch(99501);
 
 function zipSearch(zipCode){
 var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
