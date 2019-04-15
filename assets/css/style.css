@@ -32,3 +32,10 @@
 .welcomeButtons {
     text-align:center;
 }
+
+
+.city {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size:16pt;
+    text-decoration:underline;
+}
