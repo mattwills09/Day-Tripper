@@ -9,7 +9,7 @@
     width:1200px;
 }
 
-.welcomeWeather, #weather-icon {
+#welcomeWeather, #weather-icon {
     width:100px;
     height:100px;
     float:right;
