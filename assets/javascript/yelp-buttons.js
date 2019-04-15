@@ -516,9 +516,6 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + 
     });
   }
 
-  /*** END YELP***/
-
-
 $("#submit").on("click",function(e){
   e.preventDefault();
   chosenCategories.forEach(function(selected){
@@ -531,6 +528,7 @@ $("#submit").on("click",function(e){
   });
 });
 
+ /*** END YELP***/
 
  
   //close document ready  
