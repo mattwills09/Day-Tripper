@@ -8,6 +8,7 @@
     <!--link to bootstrap stylesheet-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
@@ -25,10 +26,11 @@
             <!--icon for weather (sun/cloud/etc)-->
             <img id="weather-icon" src="assets/images/sunny.jpg" alt="sunny">
         </div>
-        <div class="col-md-3">
-            <!--temperature high and low-->
-            <span id="temp-hi"></span> /Temp HI & LOW/ <span id="temp-lo"></span>
-        
+        <div class="col-md-6">
+                <div class="city"></div>
+                <div class="temp6"></div>
+                <div class="conditions"></div>
+                <div class="suggestNight"></div><br>
         </div>
         <div class="col-md-6">
             <div class="row">
@@ -80,7 +82,7 @@
     <!--link to firebase-->
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <!--link to our javascript-->
-    <script src="assets/app.js"></script>
+    <script src="assets/javascript/weather.js"></script>
 </body>
 
 </html>
