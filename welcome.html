@@ -23,6 +23,8 @@
                     <img id="welcomeWeather">
                 </div>
 
+                <div class="city"></div>
+
                 <div class="col-md-9">
                     <div class="temp3">Temperature: </div><br>
                     <div class="conditions">Current Conditions: </div> <br>
@@ -39,7 +41,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div id="categories-1" class="col-md-12">
                     <p class="lead"><em>How about..</em></p>
                     <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
                     <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
@@ -54,7 +56,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div id = "categories-2" class="col-md-12">
                     <hr class="my-4">
                     <p>Or... </p>
 
@@ -71,11 +73,8 @@
     <nav>
 
     </nav>
-    <!--dynamically populates with buttons using Al's code-->
-        <div id="categories">
 
-        </div>
-    </div>
+</div>
 
 
     <!--link to jquery-->
@@ -88,6 +87,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <!--link to our javascript-->
     <script src="assets/javascript/weather.js"></script>
+    <script src="assets/javascript/yelp-buttons.js"></script>
 </body>
 
 </html>

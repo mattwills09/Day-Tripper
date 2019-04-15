@@ -10,7 +10,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-
 //Add Login Event
 $("#btnLogin").on("click", function (event) {
     event.preventDefault();
@@ -20,11 +19,12 @@ $("#btnLogin").on("click", function (event) {
     firebase.auth().signInWithEmailAndPassword(email, pass)
         .then(function (response) {
             console.log(response);
-            window.location = 'zip.html';
+            $("#zipModal").modal("show");
         })
         .catch(function (error) {
             // Handle Errors here.
-            $("#alert").modal("show");
+            $("#alertArea").removeClass("invisible");
+            $("#alert").text("Hold on -- Let's Get You Signed Up...");
             // ...
         });
 
@@ -41,26 +41,68 @@ $("#btnSignup").on("click", function (event) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        console.log(problem)
         // ...
     });
-    $("#sign-in").modal("show");
+    $("#alertArea").removeClass("invisible");
+    $("#alert").text("You're signed up! Let's login in now...");
 });
 
-// firebase.auth().onAuthStateChanged(user => {
-//     if(user) {
-//       window.location = 'zip.html'; //After successful login, user will be redirected to home.html
-//     }
-//   });
-
+//Add Logout Event
 $("#btnLogout").on("click", function (event) {
     event.preventDefault();
-    //Get elements
-
     firebase.auth().signOut()
         .then(function () {
-            alert("signed out");
+            $("#alertArea").removeClass("invisible");
+            $("#alert").text("Hold on -- Let's Get You Signed Up...");
         })
         .catch(function (error) {
             console.log(error);
         })
+});
+
+
+//Add a realtime listener
+firebase.auth().onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+        console.log(firebaseUser);
+        $("#logout").removeClass("invisible");
+    }
+    else {
+        console.log("not logged in");
+        $("#logout").addClass("invisible");
+    }
+});
+
+/*-----------------! Zipcode Portion !---------------------*/
+
+var database = firebase.database();
+
+$("#btnGo").on("click", function (event) {
+
+    event.preventDefault();
+
+    var email = $("#txtEmail").val();
+    var zip = $("#zip-input").val();
+
+
+    var User = {
+        email: email,
+        zip: zip
+    };
+
+    database.ref().push(User);
+
+     //Create Firebase event for adding to the database and a row in the html when a user adds an entry
+    database.ref().on("child_added", function (childSnapshot) {
+        // storing the snapshot.val() in a variable for convenience
+        console.log(childSnapshot.val());
+
+        //Stores everything into a variable
+        var userZip = childSnapshot.val().zip;
+
+        // Train info
+        console.log(userZip);
+    });
+    window.location = 'welcome.html';
 });
