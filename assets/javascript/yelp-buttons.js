@@ -180,22 +180,10 @@ $(document).ready(function () {
     {activity:"fishing", category:"Wild Life Gaming"},
     {activity:"wildlifehunting", category:"Wild Life Gaming"},
     {activity:"sledding", category:"Winter sports"}];
-var adventureSports = ["bungeejumping", "climbing", "zorbing", "rock_climbing", "trampoline", "zipline", "dartarenas", "canyoneering", "escapegames", "hanggliding", "horsebackriding", "hot_air_balloons", "mountainbiking", "paragliding", "skydiving"];
-var arts = ["eatertainment", "jazzandblues", "musicvenues", "publicart", "galleries", "cabaret", "hauntedhouses", "opera", "carousels", "festivals", "theater"];
-var clubs = ["countryclubs", "social_clubs"];
-var fitness = ["sports_clubs", "aerialfitness", "fitness", "pilates", "healthtrainers	", "barreclasses", "boxing", "cardioclasses", "circuittraininggyms", "cyclingclasses", "gymnastics", "gyms", "intervaltraininggyms", "bootcamps", "challengecourses"];
-var combatSports = ["gun_ranges", "airsoft", "brazilianjiujitsu", "chinesemartialarts", "karate", "kickboxing", "martialarts", "muaythai", "selfdefenseclasses", "taekwondo", "lasertag", "paintball"];
-var museums = ["artmuseums", "childrensmuseums", "museums", "observatories", "planetarium"];
-var parks = ["aquariums", "amusementparks", "dog_parks", "parks", "playgrounds", "recreation", "parklets"];
-var kids = ["daycamps", "kids_activities", "makerspaces", "summer_camps", "indoor_playcenter"];
 
 
-    activityCategory.forEach(function(item){
-      if(item.category == "Kid centric"){
-        kids.push(item.activity);
-      }
-    });
-    console.log(kids);
+
+
  /*** WEATHER WEATHER WEATHER***/
 
  function processData(response){
