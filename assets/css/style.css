@@ -2,14 +2,21 @@
     box-sizing:border-box;
 }
 
-.jumbotron, .thingsContainer, .myListContainer {
+.jumbotron, .thingsContainer, .myListContainer, #login-form {
     margin:auto;
     background-color:white;
-    border:2px solid green;
+    border:2px solid navy;
     width:1200px;
+    padding:15px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top:5px;
 }
 
-#welcomeWeather, #weather-icon {
+.form-group {
+    text-align:center;
+}
+
+#welcomeWeather, #weather-icon, #forecastWeather {
     width:100px;
     height:100px;
     float:right;
