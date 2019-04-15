@@ -14,10 +14,15 @@ function processData(response) {
 
     var suggestionDay = response.list[0].main.temp;
 
-    if (suggestionDay >= 60)
+    if (suggestionDay >= 60) {
         $(".suggestDay").text("Woot!  Jen's kids can wear SHORTS today!");
-    else
-        $(".suggestDay").text("No shorts today, looks like you should bring a jacket also.. bummer");
+        $("#topsIcon").attr("src", "assets/images/tshirt.png");
+        $("#bottomsIcon").attr("src", "assets/images/shorts.png");}
+    else {
+        $(".suggestDay").text("No shorts today, looks like you should bring a jacket also.. bummer.");
+        $("#topsIcon").attr("src", "assets/images/jacket.png");
+        $("#bottomsIcon").attr("src", "assets/images/pants.png");
+    }
 
     var suggestionNight = response.list[0].main.temp;
 
@@ -46,7 +51,7 @@ function processData(response) {
         $("#welcomeWeather").attr("src", "assets/images/partly-cloudy.png");
      }
     else {
-        $("#welcomeWeather").attr("src", "assets/images/sunny.jpg");
+        $("#welcomeWeather").attr("src", "assets/images/sunny.png");
     }
 
     if (rainChance6 == "Rain") {
@@ -59,13 +64,15 @@ function processData(response) {
         $("#forecastWeather").attr("src", "assets/images/partly-cloudy.png");
      }
     else {
-        $("#forecastWeather").attr("src", "assets/images/sunny.jpg");
+        $("#forecastWeather").attr("src", "assets/images/sunny.png");
     }
+
+
 };
 
 //-----------------ZIP CODE API QUERY------------------------
 
-zipSearch(99501);
+zipSearch(19125);
 
 function zipSearch(zipCode){
 var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
