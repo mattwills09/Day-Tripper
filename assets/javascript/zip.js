@@ -20,15 +20,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-//When authenticated user show zip-code input
-var user = firebase.auth().currentUser;
-var usersRef = firebase.database().ref("users");
-if (user) {
-  usersRef.child(user.uid).set({ 
-    email: email,
-    zip: zip,
-  });
-}
 
 //Push Data to Database
 var database = firebase.database();
@@ -59,12 +50,57 @@ $("#find-zipcode").on("click", function (event) {
         // Train info
         console.log(userZip);
 
-        $("#zipcode-reveal").text("Let's head to " + userZip),
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + userZip + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
 
-            function (errorObject) {
-                console.log("Errors handled: " + errorObject.code);
-            };
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+
+            $(".city").html("<h1>" + response.city.name + " Weather Details</h1>");
+            $(".3-Hour").html("<h2>3-Hour Forecast</h2>");   
+            $(".temp3").text("Temperature (F) For Next 3 Hours: " + response.list[0].main.temp);
+            $(".conditions3").text("Current Conidtions: " + response.list[0].weather[0].description);
+            $(".wind3").text("Wind Speed: " + response.list[0].wind.speed + " mph");
+            $(".humidity3").text("Humidity: " + response.list[0].main.humidity);
+            $(".temp3max").text("Next 3 Hours - Max Temperature (F): " + response.list[0].main.temp_max);
+            $(".temp3min").text("Next 3 Hours - Min Temperature (F): " + response.list[0].main.temp_min);
+            $(".6-Hour").html("<h2>3-Hour Forecast</h2>");   
+            $(".temp6").text("Forecasted Temperature (F) in 6 Hours: " + response.list[1].main.temp);
+            $(".conditions6").text("Current Conidtions: " + response.list[1].weather[0].description);
+            $(".wind6").text("Wind Speed: " + response.list[1].wind.speed + " mph");
+            $(".humidity6").text("Humidity: " + response.list[1].main.humidity);
+            $(".temp6max").text("Next 6 Hours - Max Temperature (F): " + response.list[1].main.temp_max);
+            $(".temp6min").text("Next 6 Hours - Min Temperature (F): " + response.list[1].main.temp_min);
+
+            //------------------------------------------------------------
+
+            var suggestionDay = response.list[0].main.temp_max;
+
+            if (suggestionDay >= 60)
+                $(".suggestion-day").text("Today looks like a SHORTS day!");
+            else
+                $(".suggestion-day").text("Nope, today looks like PANTS weather.. bummer");
+
+            var suggestionNight = response.list[1].main.temp_max;
+
+            if (suggestionNight >= 60)
+                $(".suggestion-night").text("Tonight looks like a SHORTS night!");
+            else
+                $(".suggestion-night").text("Nope, tonight looks like PANTS weather.. bummer");
+
+            //------------------------------------------------------------
+
+            console.log(suggestion);
+            console.log("Temperature (F): " + response.list[0].main.temp);
+            console.log("Current Conidtions: " + response.list[0].weather[0].description);
+            console.log("Wind Speed: " + response.list[0].wind.speed + " mph");
+            console.log("Next 3 Hours - Max Temperature (F): " + response.list[0].main.temp_max);
+            console.log("Next 3 Hours - Min Temperature (F): " + response.list[0].main.temp_min);
+            console.log("Next 6 Hours - Max Temperature (F): " + response.list[0].main.temp_max);
+            console.log("Next 6 Hours - Min Temperature (F): " + response.list[0].main.temp_min);
+
+        });
     });
 });
-
-
