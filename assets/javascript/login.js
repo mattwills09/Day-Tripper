@@ -90,7 +90,6 @@ $(document).ready(function () {
 
     var user;
 
-
     //Add a realtime listener
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
@@ -113,116 +112,52 @@ $(document).ready(function () {
     var database = firebase.database();
 
     $("#btnGo").on("click", function (event) {
-
         event.preventDefault();
 
         var zip = $("#zip-input").val();
+        console.log(zip);
+        var corrZip = zip
 
-        if (zip == '') {
-            $("#alertLocat").removeClass("invisible");
-            $("#alertLocatTxt").text("A zip code is needed");
-            $("#zip-input").val("");
-        }
-        else {
-            if ((zip.length) < 5) {
-                $("#alertLocat").removeClass("invisible");
-                $("#alertLocatTxt").text("5 digits are needed");
-                $("#zip-input").val("");
-            }
-            else {
-                if ((zip.length) > 5) {
-                    $("#alertLocat").removeClass("invisible");
-                    $("#alertLocatTxt").text("Just 5 digits are needed");
-                    $("#zip-input").val("");
-                }
-                else {
-                    if (!/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip)) {
-                        $("#alertLocat").removeClass("invisible");
-                        $("#alertLocatTxt").text("Not a vaild zipcode");
-                        $("#zip-input").val("");
-                    }
-                    else {
-                        $("#alertLocat").addClass("invisible");
-                        var corrZip=zip
-                    }
-                }
-            }
-        
+        var newUser = {
+            uid: user.uid,
+            email: user.email,
+            zip: corrZip
 
-            var email = $("#txtEmail").val();
+        };
 
-            console.log("Correct:" + corrZip);
-            console.log(user.uid);
+        database.ref("user/" + user.uid).set(newUser);
+        localStorage.setItem("zip", corrZip);
+    });
 
-            localStorage.setItem("zip", corrZip);
+    /*-----------------! Geo Location !---------------------*/
+    $("#btnGeoGo").on("click", function (event) {
 
-            console.log(localStorage.getItem("zip"));
+        event.preventDefault();
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
 
             var newUser = {
-                zip: zip
+                uid: user.uid,
+                email: user.email,
+                latitude: lat,
+                longitude: long
             };
 
-            database.ref().push(newUser);
+            database.ref("user/" + user.uid).set(newUser);
+            localStorage.setItem("latitude", lat);
+            localStorage.setItem("longitude", long);
 
-            console.log("Got it")
-            /* 
-                database.ref('users/').push(newUser); */
-
-            // console.log(newUser.email)
-            // console.log(newUser.zip)
-
-
-            /* var database = firebase.database();
-            DatabaseReference ref = database.getReference('users/user.uid/email');
-            var query = users
-                .orderByChild('email')
-                .equalTo(firebaseUser.email)
-                .limitToLast(1);
-            
-            query.on('value', snap => {
-                console.log(response);
-            }) */
-
-            /*-----------------! Geo Location !---------------------*/
-            $("#btnGeoGo").on("click", function (event) {
-
-                event.preventDefault();
-
-                var lat;
-                var long;
-
-
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var lat = position.coords.latitude;
-                    var long = position.coords.longitude;
-
-                    localStorage.setItem("latitude", lat);
-                    localStorage.setItem("longitude", long);
-                });
-
-
-                console.log(localStorage.getItem("latitude"));
-                console.log(localStorage.getItem("longitude"));
-
-                /*            var newUser = {
-                               email: email,
-                               latitude: lat,
-                               longitude: long
-                           }
-               
-               
-                   database.ref('users/' + user.uid).set(newUser); */
-
-
-            });
-
-            $(window).keydown(function (event) {
-                if (event.keyCode == 13) {
-                    event.preventDefault();
-                    return false;
-                }
-            });
-        };
+        });
     });
-}
-)
+});
+
+
+
+
+
+
+
+
+
