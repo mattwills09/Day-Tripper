@@ -2,50 +2,90 @@
 <html lang="en-us">
 
 <head>
-    <meta charset="utf-8">
-    <!--set viewport for responsive design-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--link to bootstrap stylesheet-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+
+
+  <meta charset="UTF-8">
+  <title>Day Tripper</title>
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Bootstrap CDN-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+
+  <link rel="stylesheet" href="assets\css\style.css">
 
 </head>
 
 <body>
 
-    <div class="containerIndex">
-        <h2>enter zipcode</h2>
 
-        <form id="location-form">
-            <label for="zip-input"></label>
-            <input type="text" id="city-input" value="zip code.." onfocus="this.value=''"><br><br>
+  <div id="login-form" class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div id="alertArea" class="invisible">
+          <div id="alert" class="alert alert-primary" role="alert">
+          </div>
+        </div>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp"
+              placeholder="Enter email">
+          </div>
 
-            <h3>- or -</h3>
-            <br>
-                    
-            <input id="add-city" type="submit" class="btn btn-warning" value="get location!">
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="textPassword" placeholder="Password">
+          </div>
+
+          <button id="btnLogin" type="submit" class="btn btn-action">Log in</button>
+          <button id="btnSignup" type="submit" class="btn btn-secondary">Sign up</button>
+          <span id="logout" class="invisible">
+            <button id="btnLogout" type="submit" class="btn btn-action">Log Out</button>
+          </span>
         </form>
-
-
-        <!--JEN'S CODE *** ONLY JEN TYPES HERE ***-->
-            <!--login form-->
-        
-            <!--get location-->
-
-        <!--*** END JEN'S CODE ****-->
+      </div>
     </div>
+  </div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="zipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Let's Plan a Day Trip!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="zipcode">Where to?</label>
+                <input type="text" class="form-control" id="zip-input" placeholder="Zipcode">
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btnGo" type="button" class="btn btn-primary">Let's Go!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+</div>
 
 
-    <!--link to jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--link to bootstrap javascript-->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <!--link to firebase-->
-    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
-    <!--link to our javascript-->
-    <script src="assets/app.js"></script>
+</body>
+
+
+<script src="assets\javascript\login.js"></script>
 
 </body>
 

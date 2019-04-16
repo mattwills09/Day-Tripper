@@ -9,7 +9,7 @@
     width:1200px;
 }
 
-.welcomeWeather, #weather-icon {
+#welcomeWeather, #weather-icon {
     width:100px;
     height:100px;
     float:right;
@@ -31,4 +31,11 @@
 
 .welcomeButtons {
     text-align:center;
+}
+
+
+.city {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size:16pt;
+    text-decoration:underline;
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Day Tripper</title>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+
+    <link rel="stylesheet" href="assets\css\style.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <button id="btnLogout" class="btn btn-sm btn-outline-secondary" type="button">Log Out</button>
+        </form>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Let's Plan a Day Trip! Where to?</label>
+                        <input type="text" class="form-control" id="zip-input" placeholder="Enter zipcode">
+                    </div>
+
+                    <button id="find-zipcode" type="submit" class="btn btn-secondary">Zipcode</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="city"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="3-Hour"></div>
+                <div class="temp3"></div>
+                <div class="conditions3"></div>
+                <div class="wind3"></div>
+                <div class="humidity3"></div>
+                <div class="temp3max"></div>
+                <div class="temp3min"></div><br>
+
+                <div class="suggestion-day"></div><br>
+
+                <div class="6-Hour"></div>
+                <div class="temp6"></div>
+                <div class="conditions6"></div>
+                <div class="wind6"></div>
+                <div class="humidity6"></div>
+                <div class="temp6max"></div>
+                <div class="temp6min"></div><br>
+
+                <div class="suggestion-night"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="assets\javascript\zip.js"></script>
+</body>
+
+</html>

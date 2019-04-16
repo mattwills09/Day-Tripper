@@ -117,7 +117,9 @@ $(document).on('click', '.categoryButton', function () {
 //  Render search results on page    
     $("#categories-anchor").html("<p></p>");
     $("p").text(searchArr);
+
     searchArr.forEach(getPOIsCOORDS(searchArr[i], "39.9553076", "-75.1720374"));
+
 });
 
 

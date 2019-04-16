@@ -14,67 +14,81 @@
 
 <body>
 
-        <div class="jumbotron">
-            
+    <div class="container">
+    <div class="jumbotron">
+
         <div class="welcomeButtons">
 
             <div class="row">
-                <div class="col-md-3">
-                    <img class="welcomeWeather" src="assets/images/sunny.jpg">
+                <div class="col-md-4">
+                    <img id="welcomeWeather">
                 </div>
 
-                <div class="col-md-9">
-                    <div class="temp3">Temperature: </div><br>
-                    Clothing: <br>
-                    <div class="suggestDay">Suggestion: </div><br>
+
+                <div class="col-md-6">
+                    <div class="city"></div><br>
+                    <div class="temp3">Temperature: </div>
+                    <div class="conditions">Current Conditions: </div>
+                    <div class="suggestDay">Suggestion: </div>
+
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="suggestion"><h2 class="display-4"></h2></div>
+                    <div class="suggestion">
+                        <h2 class="display-4"></h2>
+                    </div>
                     <hr class="my-4">
 
                 </div>
             </div>
+            <div class="card card-body">
+                <div class="collapse show" id="category-buttons">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="lead"><em>How about..</em></p>
-                    <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
-                    <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
-                    <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
-                            
-                    <br><br>
-        
-                    <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
-                    <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
-                    <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
+                    <div class="row">
+                        <div id="categories-1" class="col-md-12">
+                            <p class="lead"><em>How about..</em></p>
+
+                        </div>
+                    </div>
+
+                    <div class="row pb-4">
+                        <div id="categories-2" class="col-md-12">
+                            <hr class="my-4">
+                            <p>Or... </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-success" type="button" data-toggle="collapse"
+                            data-target="#category-buttons" aria-expanded="true" aria-controls="category-buttons"
+                            id="submit">
+                            Find something to do!
+                        </button>
+
+                    </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <hr class="my-4">
-                    <p>Or... </p>
-
-                    <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
-                    <a class="btn btn-outline-success" href="#" role="button">Learn more</a>
-                </div>
-            </div>
-
-
 
         </div>
     </div>
 
+            <div class="row">
+                <div id="results" class="col-md-12">
+
+                </div>
+            </div>
+
+
+
+
     <nav>
 
     </nav>
-    <!--dynamically populates with buttons using Al's code-->
-        <div id="categories">
 
-        </div>
     </div>
 
 
@@ -87,7 +101,8 @@
     <!--link to firebase-->
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <!--link to our javascript-->
-    <script src="assets/javascript/weather.js"></script>
+    <!-- <script src="assets/javascript/weather.js"></script> -->
+    <script src="assets/javascript/yelp-buttons.js"></script>
 </body>
 
 </html>
