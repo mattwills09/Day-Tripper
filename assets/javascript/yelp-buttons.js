@@ -13,14 +13,141 @@ $(document).ready(function () {
   });
 
   //SHARED GLOBAL VARIABLES
-  var zipcode = 19010;
+  var zipcode = localStorage.getItem("zip");
+  console.log(zipcode);
   var lat = "";
   var long = "";
   var rainChance;
 
+   /*** WEATHER WEATHER WEATHER***/
+   getWeather.zipSearch(zipcode);
+  //Takes a JSON object from the weather API and uses it to give the user suggestions on how to prepare for that day's weather
+  function processWeatherData(response) {
+    $(".city").text(response.city.name + "'s Current Weather");
+    $(".temp3").text("Current Temperature (F): " + response.list[0].main.temp);
+    $(".conditions").text("Current Conditions: " + response.list[0].weather[0].description);
+
+    $(".temp6").text("Forecasted Temperature (Next 6 hrs): " + response.list[1].main.temp);
+    $(".conditions").text("Forecasted Conditions: " + response.list[1].weather[0].description);
+
+
+    //-----------------------------------------------------------------
+
+    var suggestionDay = response.list[0].main.temp;
+
+    if (suggestionDay >= 60)
+      $(".suggestDay").text("Woot!  Jen's kids can wear SHORTS today!");
+    else
+      $(".suggestDay").text("No shorts today, looks like you should bring a jacket also.. bummer");
+
+    var suggestionNight = response.list[0].main.temp;
+
+    if (suggestionNight >= 60)
+      $(".suggestNight").text("Keep those shorts for later!");
+    else
+      $(".suggestNight").text("Most likely you'll need a jacket or sweater later, looks a little chilly.");
+
+    //-----------------------------------------------------------------
+    // 3-hour / Current Weather
+    var cloudCover = response.list[0].clouds.all;
+    rainChance = response.list[0].weather[0].main;//update global 
+    // 6-hour / Forecasted Weather
+    var cloudCover6 = response.list[1].clouds.all;
+    var rainChance6 = response.list[1].weather[0].main;
+
+
+
+    if (rainChance == "Rain") {
+      $("#welcomeWeather").attr("src", "assets/images/rainy.png");
+    }
+    else if (cloudCover >= 75) {
+      $("#welcomeWeather").attr("src", "assets/images/cloudy.png");
+    }
+    else if (cloudCover >= 50) {
+      $("#welcomeWeather").attr("src", "assets/images/partly-cloudy.png");
+    }
+    else {
+      $("#welcomeWeather").attr("src", "assets/images/sunny.jpg");
+    }
+
+    if (rainChance6 == "Rain") {
+      $("#forecastWeather").attr("src", "assets/images/rainy.png");
+    }
+    else if (cloudCover6 >= 75) {
+      $("#forecastWeather").attr("src", "assets/images/cloudy.png");
+    }
+    else if (cloudCover6 >= 50) {
+      $("#forecastWeather").attr("src", "assets/images/partly-cloudy.png");
+    }
+    else {
+      $("#forecastWeather").attr("src", "assets/images/sunny.jpg");
+    }
+  }
+  //object with two methods, zipSearch to make API call based on zip, and geoSearch to make API call based on geolocation
+  var getWeather = {
+    //-----------------ZIP CODE API QUERY------------------------
+
+
+    zipSearch: function (zipCode) {
+      var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+        processWeatherData(response)
+
+        if (rainChance == "Clear") {
+          outdoorsActivities.forEach(function (item) {
+            makeButton(item, "#categories-1");
+          });
+          inOutActivities.forEach(function (item) {
+            makeButton(item, "#categories-1");
+          });
+          indoorActivities.forEach(function (item) {
+            makeButton(item, "#categories-2");
+          });
+        }
+        else {
+          indoorActivities.forEach(function (item) {
+            makeButton(item, "#categories-1");
+          });
+          inOutActivities.forEach(function (item) {
+            makeButton(item, "#categories-1");
+          });
+          outdoorsActivities.forEach(function (item) {
+            makeButton(item, "#categories-2");
+          });
+        }
+      });
+    },
+
+    //-----------------LATITUDE/LONGITUDE API QUERY------------------------
+
+    geoSearch: function (latitude, longitude) {
+      var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+
+        processWeatherData(response);
+
+
+      });
+    }
+  }
+ 
+  ////////////////////
+ /*** END WEATHER***/
+
+ /////////////
+ /////////////
+ /**** YELP ****/
+
   //array to hold POI (point of interest) objects
   var yelpResults = {};
-  var POIs = [];
   var searchCategories = [];
 
 
@@ -198,132 +325,6 @@ $(document).ready(function () {
 
 
 
-
-  /*** WEATHER WEATHER WEATHER***/
-  //Takes a JSON object from the weather API and uses it to give the user suggestions on how to prepare for that day's weather
-  function processWeatherData(response) {
-    $(".city").text(response.city.name + "'s Current Weather");
-    $(".temp3").text("Current Temperature (F): " + response.list[0].main.temp);
-    $(".conditions").text("Current Conditions: " + response.list[0].weather[0].description);
-
-    $(".temp6").text("Forecasted Temperature (Next 6 hrs): " + response.list[1].main.temp);
-    $(".conditions").text("Forecasted Conditions: " + response.list[1].weather[0].description);
-
-
-    //-----------------------------------------------------------------
-
-    var suggestionDay = response.list[0].main.temp;
-
-    if (suggestionDay >= 60)
-      $(".suggestDay").text("Woot!  Jen's kids can wear SHORTS today!");
-    else
-      $(".suggestDay").text("No shorts today, looks like you should bring a jacket also.. bummer");
-
-    var suggestionNight = response.list[0].main.temp;
-
-    if (suggestionNight >= 60)
-      $(".suggestNight").text("Keep those shorts for later!");
-    else
-      $(".suggestNight").text("Most likely you'll need a jacket or sweater later, looks a little chilly.");
-
-    //-----------------------------------------------------------------
-    // 3-hour / Current Weather
-    var cloudCover = response.list[0].clouds.all;
-    rainChance = response.list[0].weather[0].main;//update global 
-    // 6-hour / Forecasted Weather
-    var cloudCover6 = response.list[1].clouds.all;
-    var rainChance6 = response.list[1].weather[0].main;
-
-
-
-    if (rainChance == "Rain") {
-      $("#welcomeWeather").attr("src", "assets/images/rainy.png");
-    }
-    else if (cloudCover >= 75) {
-      $("#welcomeWeather").attr("src", "assets/images/cloudy.png");
-    }
-    else if (cloudCover >= 50) {
-      $("#welcomeWeather").attr("src", "assets/images/partly-cloudy.png");
-    }
-    else {
-      $("#welcomeWeather").attr("src", "assets/images/sunny.jpg");
-    }
-
-    if (rainChance6 == "Rain") {
-      $("#forecastWeather").attr("src", "assets/images/rainy.png");
-    }
-    else if (cloudCover6 >= 75) {
-      $("#forecastWeather").attr("src", "assets/images/cloudy.png");
-    }
-    else if (cloudCover6 >= 50) {
-      $("#forecastWeather").attr("src", "assets/images/partly-cloudy.png");
-    }
-    else {
-      $("#forecastWeather").attr("src", "assets/images/sunny.jpg");
-    }
-  }
-  //object with two methods, zipSearch to make API call based on zip, and geoSearch to make API call based on geolocation
-  var getWeather = {
-    //-----------------ZIP CODE API QUERY------------------------
-
-
-    zipSearch: function (zipCode) {
-      var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
-
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function (response) {
-        processWeatherData(response)
-
-        if (rainChance == "Clear") {
-          outdoorsActivities.forEach(function (item) {
-            makeButton(item, "#categories-1");
-          });
-          inOutActivities.forEach(function (item) {
-            makeButton(item, "#categories-1");
-          });
-          indoorActivities.forEach(function (item) {
-            makeButton(item, "#categories-2");
-          });
-        }
-        else {
-          indoorActivities.forEach(function (item) {
-            makeButton(item, "#categories-1");
-          });
-          inOutActivities.forEach(function (item) {
-            makeButton(item, "#categories-1");
-          });
-          outdoorsActivities.forEach(function (item) {
-            makeButton(item, "#categories-2");
-          });
-        }
-      });
-    },
-
-    //-----------------LATITUDE/LONGITUDE API QUERY------------------------
-
-    geoSearch: function (latitude, longitude) {
-      var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
-
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function (response) {
-
-        processWeatherData(response);
-
-
-      });
-    }
-  }
-
-  //Calls firebase for user's location and makes a weather call
-  getWeather.zipSearch(97035);
-
-
-  /****  YELP  FUNCTIONALITY ****/
-
   //POI object constructor takes a JSON object returned by yelp API call
   function POI(response) {
     this.name = response.name, //business name
@@ -401,7 +402,6 @@ $(document).ready(function () {
 
   //function to make a yelp API call, takes 1 parameter: yelpID (string)
   function getPOIdetails(yelpID) {
-    console.log("getPOIdetails");
     //yelp query url to search by business ID
     var queryURL = "https://cors-anywhere.herokuapp.com/http://api.yelp.com/v3/businesses/" + yelpID;
 
@@ -472,11 +472,12 @@ $(document).ready(function () {
   }
 
   function publishResults(POIs) {
-    //console.log("publishResults");
-    var myList = [];
+
+    var myList = []; //arry of POIs that user saved
+    
     //for each of the yelp results
     POIs.forEach(function (result) {
-
+      //grab data
       var name = result.name;
       var street = result.street;
       var city = result.city;
@@ -485,9 +486,11 @@ $(document).ready(function () {
       var open = result.hours[0].is_open_now;
       var link = result.link;
 
+      //make bootstrap card
       var div = $("<div class='card card-body m-2'>");
       div.attr({ "id": result.name });
 
+      //append elements for each piece of data we want shown
       div.append(addName(name,open)).append(addAddress(street, city)).append(addPhone(phone)).append(addLink(link)).append(addListButton());
       //console.log("publishResults div: " + JSON.stringify(div));
       $("#results").append(div);
@@ -532,38 +535,47 @@ $(document).ready(function () {
 
         return linkTag;
       }
+      //button to add the parent card to the user saved list (my list)
       function addListButton(){
         var button = $("<button class='btn btn-outline-primary mt-2'>");
         button.text("Add to My List");
+        //on click, save to my list
         button.on("click",function(){
           if(myList.indexOf(name) == -1){
-            myList.push(name);
+            myList.push(name);//add to array
+            //make a copy of the parent div
             var savedItem = $(this).closest("div").clone();
+            //update the button on the cloned div to a remove button
             $(savedItem.find("button")).text("Remove").on("click",function(){
+              //remove item from the array
               myList.splice(myList.indexOf(name),1);
+              //remove item from DOM
               savedItem.remove();
             });
+            //add div to my list
             savedItem.appendTo("#myList");
           }          
         });
         
-        return button;
+        return button; //return to be appended to card
       }
     });
   }
 
+  //creates a promise to wait a certain amount of time before pushing them to the DOM
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-
+  //Makes yelp API calls based on the buttons the user selected
   async function yelpHandler() {
-    var categoryCalls = [];
+    var categoryCalls = []; //array to hold all subcategories associated with the broader categories available to users
 
     //go through categories that the user selected
     chosenCategories.forEach(function (selected) {
       var selected = selected;
       //go through all possible activity categories
+      //this object is declared above in the predefined categories section
       activityCategory.forEach(function (item) {
         //see if they fall under one of the broader categories that the user selected
         if (selected == item.category) {
@@ -573,59 +585,65 @@ $(document).ready(function () {
       });
     });
 
+    //for each category the user selected
     for (var i = 0; i < searchCategories.length; i++) {
-
-
-
-
+      //wait for half a second between calls because yelp rate limits
       await sleep(500);
+      //add the ajax call into the categoryCalls array
       categoryCalls.push(getPOIsZIP(searchCategories[i], zipcode));
 
 
     }
-
+    //after all categoryCalls are completed
     Promise.all(categoryCalls).then(function (categoryArray) {
       
       //loop through the list of JSON responses
       var categoryArray = categoryArray;
 
+      //for each JSON object (which is a set of businesses that  match the category)
       categoryArray.forEach(function (yelpObject) {
 
+        //save businesses in a variable
         var businesses = yelpObject.businesses;
+
+        //loop through businesses
         if (businesses.length > 0) {
           for (var i = 0; i < businesses.length; i++) {
-
+            //save the business into the yelpResults dictionary with id as key in order to avoid duplicates
             yelpResults[businesses[i].id] = businesses[i];
-
-
           }
         }
       });
 
-
+      //make yelpResults into an array of their values
       var yelpResultsValues = Object.values(yelpResults);
 
+      //for each of the businesses in yelpResultsValues
       for (var i = 0; i < yelpResultsValues.length; i++) {
-
+        //use the business id to make a second ajax call
         getPOIdetails(yelpResultsValues[i].id);
       }
     });
 
   }
 
-
+  //when user is ready to search
   $("#submit").on("click", function (e) {
     e.preventDefault();
-    $(".spinner-grow text-primary").show();
 
+    $(".spinner-grow text-primary").removeClass("hidden");
+
+    //empty out previous results
     $("#results").empty();
+    //if the category buttons are showing, then we switch to results state
     if ($("#category-buttons").hasClass("show")) {
-      $(this).text("Try something else?");
+      $(this).text("Try something else?");//change text to indicate that user can click to re-open the category buttons and make a new search
       $(this).removeClass("btn-success").addClass("btn-primary");
-      yelpHandler();
+      yelpHandler();//call the yelpHandler to search for selected categories on yelp
     }
     else {
-      $(this).text("Find something to do!");
+      //switch back to search state
+      $(this).text("Find something to do!");//change text to indicate user can click to make yelp call
       $(this).removeClass("btn-primary").addClass("btn-success");
     }
 
