@@ -1,4 +1,3 @@
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDMrNIM1I6SatTgZfcEcc6rDUsGCNOmBNg",
@@ -10,32 +9,45 @@ var config = {
 };
 firebase.initializeApp(config);
 
+//Launch Login Modal
+$(window).on('load', function () {
+    $('#loginModal').modal('show');
+});
+
+
 //Add Login Event
 $("#btnLogin").on("click", function (event) {
     event.preventDefault();
     //Get elements
-    var email = $("#txtEmail").val();
-    var pass = $("#textPassword").val();
+    var email = $("#txtEmailLgn").val();
+    var pass = $("#textPasswordLgn").val();
     firebase.auth().signInWithEmailAndPassword(email, pass)
         .then(function (response) {
             console.log(response);
-            $("#zipModal").modal("show");
+            $('#loginModal').modal('hide');
         })
         .catch(function (error) {
             // Handle Errors here.
             $("#alertArea").removeClass("invisible");
             $("#alert").text("Hold on -- Let's Get You Signed Up...");
+            $('#signUpModal').modal('show');
             // ...
         });
 
 });
 
+//Trigger Sign-Up
+$("#sign-up-trig").on("click", function (event) {
+    event.preventDefault();
+    $('#signUpModal').modal('show');
+});
+
 //Add Signup Event
-$("#btnSignup").on("click", function (event) {
+$("#btnsignUp").on("click", function (event) {
     event.preventDefault();
     //Get elements
-    var email = $("#txtEmail").val();
-    var pass = $("#textPassword").val();
+    var email = $("#txtEmailSgu").val();
+    var pass = $("#textPasswordSgu").val();
 
     firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function (error) {
         // Handle Errors here.
@@ -44,8 +56,10 @@ $("#btnSignup").on("click", function (event) {
         console.log(problem)
         // ...
     });
-    $("#alertArea").removeClass("invisible");
-    $("#alert").text("You're signed up! Let's login in now...");
+    console.log("hi");
+    $('#loginModal').modal('hide');
+    $('#signUpModal').modal('hide');
+
 });
 
 //Add Logout Event
@@ -53,19 +67,40 @@ $("#btnLogout").on("click", function (event) {
     event.preventDefault();
     firebase.auth().signOut()
         .then(function () {
-            $("#alertArea").removeClass("invisible");
-            $("#alert").text("Hold on -- Let's Get You Signed Up...");
+            $('#loginModal').modal('hide');
         })
         .catch(function (error) {
             console.log(error);
+            $('#loginModal').modal('show');
         })
 });
+
+//Add Logout Event
+$("#btnLogoutNav").on("click", function (event) {
+    event.preventDefault();
+    firebase.auth().signOut()
+        .then(function () {
+            $('#loginModal').modal('hide');
+        })
+        .catch(function (error) {
+            console.log(error);
+            $('#loginModal').modal('hshow');
+        })
+});
+
+var user;
 
 
 //Add a realtime listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
+        user = firebaseUser
         console.log(firebaseUser);
+        console.log(firebaseUser.email);
+        console.log(firebaseUser.uid);
+        console.log("hi user");
+        $('#loginModal').modal('hide');
+        $('#signUpModal').modal('hide');
         $("#logout").removeClass("invisible");
     }
     else {
@@ -75,7 +110,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 });
 
 /*-----------------! Zipcode Portion !---------------------*/
-
 var database = firebase.database();
 
 $("#btnGo").on("click", function (event) {
@@ -84,25 +118,70 @@ $("#btnGo").on("click", function (event) {
 
     var email = $("#txtEmail").val();
     var zip = $("#zip-input").val();
+    console.log(zip);
+    console.log(user.uid);
 
+    localStorage.setItem("zip", zip);
+    
+    console.log(localStorage.getItem("zip"));
 
-    var User = {
+/*     var newUser = {
+        uid: user.uid,
         email: email,
         zip: zip
     };
 
-    database.ref().push(User);
+    database.ref('users/').push(newUser); */
 
-     //Create Firebase event for adding to the database and a row in the html when a user adds an entry
-    database.ref().on("child_added", function (childSnapshot) {
-        // storing the snapshot.val() in a variable for convenience
-        console.log(childSnapshot.val());
+    // console.log(newUser.email)
+    // console.log(newUser.zip)
 
-        //Stores everything into a variable
-        var userZip = childSnapshot.val().zip;
-
-        // Train info
-        console.log(userZip);
-    });
-    window.location = 'welcome.html';
+    window.location.href = "landing page.html";
 });
+
+
+/* var database = firebase.database();
+DatabaseReference ref = database.getReference('users/user.uid/email');
+var query = users
+    .orderByChild('email')
+    .equalTo(firebaseUser.email)
+    .limitToLast(1);
+
+query.on('value', snap => {
+    console.log(response);
+}) */
+
+/*-----------------! Geo Location !---------------------*/
+$("#btnGeoGo").on("click", function (event) {
+
+    event.preventDefault();
+
+   var lat;
+   var long;
+
+    
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+
+            localStorage.setItem("latitude", lat);
+            localStorage.setItem("longitude", long);
+         });
+   
+           
+            console.log(localStorage.getItem("latitude"));
+            console.log(localStorage.getItem("longitude"));
+
+ /*            var newUser = {
+                email: email,
+                latitude: lat,
+                longitude: long
+            }
+
+
+    database.ref('users/' + user.uid).set(newUser); */
+
+    window.location.href = "landing page.html";
+
+});
+
