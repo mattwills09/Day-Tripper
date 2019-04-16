@@ -421,9 +421,10 @@ $(document).ready(function () {
 
     $.ajax(settings).then(function (response) {
       var poi = new POI(response);
-
-      POIs.push(poi);
-      publishResults(POIs);
+      
+      var results = [];
+      results.push(poi);
+      publishResults(results);
     });
 
   }
@@ -520,7 +521,14 @@ $(document).ready(function () {
     });
   }
 
-  function yelpHandler() {
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
+  async function yelpHandler() {
+    var categoryCalls = [];
+
     //go through categories that the user selected
     chosenCategories.forEach(function (selected) {
       var selected = selected;
@@ -533,20 +541,52 @@ $(document).ready(function () {
         }
       });
     });
-    var categoryCalls = [];
-    searchCategories.forEach(function (item) {
-      categoryCalls.push(getPOIsZIP(item, zipcode));
-    });
 
+    for (var i = 0; i < searchCategories.length; i++) {
+
+
+
+      console.log("before");
+      await sleep(500);
+      categoryCalls.push(getPOIsZIP(searchCategories[i], zipcode));
+      console.log("after");
+
+    }
+    // searchCategories.forEach(function (item) {
+    //   setTimeout(function(){
+    //     console.log("before");
+    //     categoryCalls.push(getPOIsZIP(item, zipcode));
+    //     console.log("after");
+    //   }, 1000);
+    // });
+    console.log("before promnise");
     Promise.all(categoryCalls).then(function (categoryArray) {
+      console.log("promise");
       //loop through the list of JSON responses
       var categoryArray = categoryArray;
 
       categoryArray.forEach(function (yelpObject) {
-        console.log(yelpObject);
+
+        var businesses = yelpObject.businesses;
+        if (businesses.length > 0) {
+          for (var i = 0; i < businesses.length; i++) {
+
+            yelpResults[businesses[i].id] = businesses[i];
+
+
+          }
+        }
       });
+
+      console.log("done making yelpResults.");
+      var yelpResultsValues = Object.values(yelpResults);
+
+      for (var i = 0; i < yelpResultsValues.length; i++) {
+        console.log("inside loop");
+        getPOIdetails(yelpResultsValues[i].id);
+      }
     });
-  
+
   }
 
 
