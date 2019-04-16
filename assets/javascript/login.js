@@ -115,8 +115,18 @@ $(document).ready(function () {
         event.preventDefault();
 
         var zip = $("#zip-input").val();
-        console.log(zip);
-        var corrZip = zip
+
+        function checkZip(value) {
+            return (/(^\d{5}$)|(^\d{5}-\d{4}$)/).test(value);
+        };
+
+        if (checkZip(zip)==true) {
+           var corrZip=zip
+           console.log(corrZip)
+          } else { 
+            $("#alertLocat").removeClass("invisible");
+            $("#alertLocatTxt").text("Not a valid zip code -- try again.");
+          };
 
         var newUser = {
             uid: user.uid,
