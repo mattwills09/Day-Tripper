@@ -608,35 +608,7 @@ $(document).ready(function () {
   }
 
 
-  var callYelp = new Promise(function (resolve, reject) {
 
-    chosenCategories.forEach(function (selected) {
-      var selected = selected;
-
-      activityCategory.forEach(function (item) {
-        if (selected == item.category) {
-
-          searchCategories.push(item.activity);
-        }
-        searchCategories.forEach(function (item) {
-          getPOIsZIP(item, zipcode);
-        });
-      });
-    });
-    if (yelpResults.length > 1) {
-      resolve("Received results from yelp API");
-    }
-    else {
-      reject(Error("There's nothing like that around here..."));
-    }
-  });
-
-  callYelp.then(function(result){
-    console.log(yelpResults);
-  }, function (error){
-    console.log(error);
-  }
-  );
 
 
 $("#submit").on("click", function (e) {
@@ -645,7 +617,36 @@ $("#submit").on("click", function (e) {
     if ($("#category-buttons").hasClass("show")) {
       $(this).text("Try something else?");
       $(this).removeClass("btn-success").addClass("btn-primary");
-      yelpHandler();
+      // yelpHandler();
+      var callYelp = new Promise(function (resolve, reject) {
+
+        chosenCategories.forEach(function (selected) {
+          var selected = selected;
+    
+          activityCategory.forEach(function (item) {
+            if (selected == item.category) {
+    
+              searchCategories.push(item.activity);
+            }
+            searchCategories.forEach(function (item) {
+              getPOIsZIP(item, zipcode);
+            });
+          });
+        });
+        if (yelpResults.length > 1) {
+          resolve("Received results from yelp API");
+        }
+        else {
+          reject(Error("There's nothing like that around here..."));
+        }
+      });
+    
+      callYelp.then(function(){
+        console.log(yelpResults);
+      }, function (error){
+        console.log(error);
+      }
+      );
     }
     else {
       $(this).text("Find something to do!");
