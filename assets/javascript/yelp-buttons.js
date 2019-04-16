@@ -480,26 +480,39 @@ $(document).ready(function () {
       var street = result.street;
       var city = result.city;
       var phone = result.phone;
+      var hours = result.hours;
+      var open = result.hours.is_open_now;
       var link = result.link;
 
-      var div = $("<div>");
+      var div = $("<div class='card card-body m-2'>");
       div.attr({ "id": result.name });
 
-      div.append(addName(name)).append(addAddress(street, city)).append(addPhone(phone)).append(addLink(link));
+      div.append(addName(name,open)).append(addAddress(street, city)).append(addPhone(phone)).append(addLink(link));
       //console.log("publishResults div: " + JSON.stringify(div));
       $("#results").append(div);
 
-      function addName(name) {
+      function addName(name,open) {
         //console.log("addName");
-        var nameTag = $("<h3>");
+        var nameTag = $("<h3 class='card-title'>");
         nameTag.text(name);
         //console.log(nameTag);
+        if(open){
+          var openTag = $("<span class='badge badge-success'>");
+          openTag.text(open);    
+          nameTag.append(openTag);
+          
+        }
+        else{
+          var openTag = $("<span class='badge badge-secondary ml-2'>");
+          openTag.text("closed");    
+          nameTag.append(openTag);
+        }
         return nameTag;
 
       }
       function addAddress(street, city) {
         //console.log("addAddress");
-        var addressTag = $("<p>");
+        var addressTag = $("<h6 class='card-subtitle mb-3'>");
         addressTag.text(street + ", " + city);
 
         return addressTag;
@@ -510,6 +523,12 @@ $(document).ready(function () {
         phoneTag.text(phone);
 
         return phoneTag;
+      }
+      function addHours(hours){
+        var hoursTag = $("<p>");
+
+
+        return hoursTag;
       }
       function addLink(link) {
         //console.log("addLink");
@@ -546,22 +565,15 @@ $(document).ready(function () {
 
 
 
-      console.log("before");
+
       await sleep(500);
       categoryCalls.push(getPOIsZIP(searchCategories[i], zipcode));
-      console.log("after");
+
 
     }
-    // searchCategories.forEach(function (item) {
-    //   setTimeout(function(){
-    //     console.log("before");
-    //     categoryCalls.push(getPOIsZIP(item, zipcode));
-    //     console.log("after");
-    //   }, 1000);
-    // });
-    console.log("before promnise");
+
     Promise.all(categoryCalls).then(function (categoryArray) {
-      console.log("promise");
+      
       //loop through the list of JSON responses
       var categoryArray = categoryArray;
 
@@ -578,11 +590,11 @@ $(document).ready(function () {
         }
       });
 
-      console.log("done making yelpResults.");
+
       var yelpResultsValues = Object.values(yelpResults);
 
       for (var i = 0; i < yelpResultsValues.length; i++) {
-        console.log("inside loop");
+
         getPOIdetails(yelpResultsValues[i].id);
       }
     });
@@ -603,24 +615,6 @@ $(document).ready(function () {
       $(this).removeClass("btn-primary").addClass("btn-success");
     }
 
-
-    // chosenCategories.forEach(function(selected, index){
-    //   var selected = selected;
-
-    //   activityCategory.forEach(function(item){
-    //     console.log(item.category);
-    //     if(selected == item.category){
-
-    //       // console.log(chosenCategories.length);
-    //       // console.log(item.activity);
-    //       if(!yelpResults.includes(item.activity)){
-    //         getPOIsZIP(item.activity,zipcode);
-    //       }
-
-    //       getPOIdetails(locations[i].id);
-    //     }
-    //   })
-    // });
   });
 
   /*** END YELP***/
