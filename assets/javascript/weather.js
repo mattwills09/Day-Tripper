@@ -2,12 +2,12 @@
 
 function processData(response) {
 
-    $(".city").text(response.city.name + "'s Current Weather");
-    $(".temp3").text("Current Temperature (F): " + response.list[0].main.temp);
-    $(".conditions").text("Current Conditions: " + response.list[0].weather[0].description);
+    $(".city").text(response.city.name + "'s Weather");
+    $(".temp3").prepend("Current Temperature: " + response.list[0].main.temp);
+    $(".conditions3").text("Outdoor Conditions: " + response.list[0].weather[0].description);
 
-    $(".temp6").text("Forecasted Temperature (Next 6 hrs): " + response.list[1].main.temp);
-    $(".conditions").text("Forecasted Conditions: " + response.list[1].weather[0].description);
+    // $(".temp6").text("Forecasted Temperature (Next 6 hrs): " + response.list[1].main.temp);
+    // $(".conditions").text("Forecasted Conditions: " + response.list[1].weather[0].description);
 
 
     //-----------------------------------------------------------------
@@ -91,7 +91,7 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode
 //-----------------LATITUDE/LONGITUDE API QUERY------------------------
 
 // lat/lon of pennovation: 39.941433, -75.199385
-geoSearch(29.76, -95.36);
+// geoSearch(29.76, -95.36);
 
 function geoSearch(latitude, longitude){
 var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";

@@ -2,17 +2,23 @@
     box-sizing:border-box;
 }
 
+body {
+    margin-top:10px;
+    background-image:linear-gradient(rgb(238, 238, 45), white);
+    /* background-size:cover; */
+    background-repeat:no-repeat;
+}
+
 .jumbotron, .thingsContainer, .myListContainer, #login-form {
     margin:auto;
     background-color:white;
     border:2px solid blue;
     width:1200px;
-    padding:15px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding:20px;
+    padding-bottom:0px;
     margin-top:5px;
     text-align:center;
     box-shadow: 10px 10px 5px grey;
-    background-color:palegoldenrod;
 }
 
 #login-form {
@@ -20,9 +26,10 @@
 }
 
 h1 {
-    font-family:Arial, Helvetica, sans-serif;
     font-weight:bold;
     text-decoration:underline;
+    margin-left:-100px;
+    font-family:helvetica;
 }
 
 .hLine {
@@ -33,7 +40,7 @@ h1 {
 
 #results, #my-list-results {
     text-align:left;
-    font-family:Arial, Helvetica, sans-serif, sans-serif;
+    padding-bottom:25px;
 }
 
 #headerWeather {
@@ -44,11 +51,48 @@ h1 {
     width:100px;
     height:100px;
     float:right;
+    /* margin-right:10px; */
 }
 
 #topsIcon, #bottomsIcon {
-    width:50px;
-    height:50px;
+    width:40px;
+    height:40px;
+    display:block;
+    margin-left:8px;
+}
+
+#logo {
+    width:150px;
+    height:150px;
+    opacity:0.85;
+    float:left;
+    margin-left:5px;
+}
+
+.logoBanner {
+    display:flex;
+    align-items:center;
+    text-align:center;
+    width:725px;
+}
+
+#pageLogo {
+    position:absolute;
+    right:0;
+    bottom:0;
+    opacity:0.3;
+    width:382px;
+    height:354px;
+}
+
+.watermark {
+    position: relative;
+    padding-bottom:25px;
+}
+
+.clothingSuggestion {
+    display:flex;
+    align-items:flex-start;
 }
 
 .containerIndex {
@@ -69,9 +113,12 @@ h1 {
     text-align:center;
 }
 
-
 .city {
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    font-size:16pt;
+    font-size:20pt;
     text-decoration:underline;
+}
+
+.suggestDay {
+    font-style:italic;
+    margin-right:3px;
 }
