@@ -331,6 +331,19 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + 
   getPOIsCOORDS("Martial", "39.9553076", "-75.1720374")
 
 
+   //POI object constructor takes a JSON object returned by yelp API call
+   function POI(response) {
+    this.name = response.name, //business name
+      this.street = response.location.display_address[0], //building number, street name
+      this.city = response.location.display_address[1], //city, zip code
+      this.link = response.url, //link to business page on yelp
+      this.hours = response.hours,//an array of hours objects from yelp; needs to be processed
+      this.phone = response.display_phone //phone number
+  }
+
+  //getPOIsCOORDS("Martial", "39.9553076", "-75.1720374")
+
+
   //Function to make a yelp API. Takes category(string) and location (zip code number)
   function getPOIsZIP(category, location) {
     var category = category;
@@ -354,58 +367,64 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + 
     }
 
     $.ajax(settings).then(function (response) {
-      // console.log(response);
       //loop through the list of JSON responses
-      // for (var i = 0; i < locations.length; i++){
-
-      //   var yelpID = locations[i].id; //get the business id
-      //   getPOIdetails(yelpID); //send the id to getPOIdetails for a second api call
-      // }
-    });
+      var locations = response.businesses;
+      // console.log("response.businesses length: " + JSON.stringify(response.businesses).length);
+      // console.log("locations.length: " + JSON.stringify(locations.length));
+      if (JSON.stringify(response.businesses).length > 2) {
+        for (var i = 0; i < JSON.stringify(locations.length); i++){
+          // console.log(JSON.stringify(locations[i].id));
+          getPOIdetails(locations[i].id)
+        }
+      }
+      else {
+        alert("No results in you your area for " + selectedButton);
+      } 
+      
+      
+    })
+      
   }
 
-  //function to make a yelp API call, takes 3 parameters: category (string), latitude (int), and longitude (int)
-  function getPOIsCOORDS(category, lat, long) {
-    var category = category;
-    var lat = lat;
-    var long = long;
+ //function to make a yelp API call, takes 3 parameters: category (string), latitude (int), and longitude (int)
+ function getPOIsCOORDS(category, lat, long) {
+  var category = category;
+  var lat = lat;
+  var long = long;
 
-    //yelp query url to search by category and location, with a set radius
-    var queryURL = "https://cors-anywhere.herokuapp.com/http://api.yelp.com/v3/businesses/search?radius=2000&categories=" + category + "&latitude=" + lat + "&longitude=" + long;
+  //yelp query url to search by category and location, with a set radius
+  var queryURL = "https://cors-anywhere.herokuapp.com/http://api.yelp.com/v3/businesses/search?radius=2000&categories=" + category + "&latitude=" + lat + "&longitude=" + long;
 
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": queryURL,
-      "method": "GET",
-      "headers": {
-        "Authorization": "Bearer a3QTS8V50rV_Xf4jHgTIeYnfEPmEy74KhtAYhFuPJG2ai4R4NVzM4SebzmbeD5ZYDxjGd4O1ZU4ejWMq_5Z7JUUEwju02BaXT94shIGxKVpWhu7eLArA4JWxaDWuXHYx",
-        "cache-control": "no-cache",
-        "crossOrigin": "null",
-        "Postman-Token": "a926db60-6442-448e-92fa-65bffe0a2bad"
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": queryURL,
+    "method": "GET",
+    "headers": {
+      "Authorization": "Bearer a3QTS8V50rV_Xf4jHgTIeYnfEPmEy74KhtAYhFuPJG2ai4R4NVzM4SebzmbeD5ZYDxjGd4O1ZU4ejWMq_5Z7JUUEwju02BaXT94shIGxKVpWhu7eLArA4JWxaDWuXHYx",
+      "cache-control": "no-cache",
+      "crossOrigin": "null",
+      "Postman-Token": "a926db60-6442-448e-92fa-65bffe0a2bad"
+    }
+  }
+
+  $.ajax(settings).then(function (response) {
+    var locations = response.businesses;
+    //loop through the list of JSON responses
+    
+    if (JSON.stringify(response.businesses).length > 2) {
+      for (var i = 0; i < JSON.stringify(locations.length); i++){
+        getPOIdetails(locations[i].id)
       }
     }
-
-    $.ajax(settings).then(function (response) {
-      var locations = response.businesses;
-      //loop through the list of JSON responses
-      // for (var i = 0; i < locations.length; i++){
-
-      //   var yelpID = locations[i].id; //get the business id
-      //   getPOIdetails(yelpID); //send the id to getPOIdetails for a second api call
-      // }
-
-      getPOIdetails(locations[0].id);
-      getPOIdetails(locations[1].id);
-      getPOIdetails(locations[2].id);
-
-
-    });
-  }
+    else {
+      alert("No results in you your area for " + selectedButton);
+    } 
+  }) 
+}
 
   //function to make a yelp API call, takes 1 parameter: yelpID (string)
   function getPOIdetails(yelpID) {
-
     //yelp query url to search by business ID
     var queryURL = "https://cors-anywhere.herokuapp.com/http://api.yelp.com/v3/businesses/" + yelpID;
 
@@ -422,14 +441,27 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + 
       }
     }
 
+    /*
+     $.ajax({
+  url: queryURL,
+  method: "GET"
+}).then(updatePage);
+});
+
+    */
+
     $.ajax(settings).then(function (response) {
       var poi = new POI(response);
 
+      //C L E A R   P R E V I O U S   R E S U L T S 
+      yelpResults = [];
       yelpResults.push(poi);
       publishResults(yelpResults);
-    })
+
+    });
 
   }
+
 
   //dynamically makes buttons based on categories users are allowed to search for
   function makeButton(name,div) {
