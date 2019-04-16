@@ -516,8 +516,18 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + 
     });
   }
 
+
 $("#submit").on("click",function(e){
   e.preventDefault();
+  if($("#category-buttons").hasClass("show")){
+    $(this).text("Try something else?");
+    $(this).removeClass("btn-success").addClass("btn-primary");
+  }
+  else{
+    $(this).text("Find something to do!");
+    $(this).removeClass("btn-primary").addClass("btn-success");
+  }
+  
   chosenCategories.forEach(function(selected){
     var selected = selected;
     activityCategory.forEach(function(item){
