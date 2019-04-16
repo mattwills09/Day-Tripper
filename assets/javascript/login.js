@@ -100,11 +100,9 @@ $(document).ready(function () {
             console.log("hi user");
             $('#loginModal').modal('hide');
             $('#signUpModal').modal('hide');
-            $("#logout").removeClass("invisible");
         }
         else {
             console.log("not logged in");
-            $("#logout").addClass("invisible");
         }
     });
 
@@ -137,6 +135,7 @@ $(document).ready(function () {
 
         database.ref("user/" + user.uid).set(newUser);
         localStorage.setItem("zip", corrZip);
+        window.location.href = "./welcome.html";
     });
 
     /*-----------------! Geo Location !---------------------*/
