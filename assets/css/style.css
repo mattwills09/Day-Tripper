@@ -39,3 +39,9 @@
     font-size:16pt;
     text-decoration:underline;
 }
+.warning{
+    color: red;
+}
+.hidden{
+    display: none;
+}
