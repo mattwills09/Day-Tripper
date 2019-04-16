@@ -19,9 +19,10 @@ $(document).ready(function () {
   var rainChance;
 
   //array to hold POI (point of interest) objects
-  var yelpResults = [];
+  var yelpResults = {};
   var POIs = [];
   var searchCategories = [];
+
 
   //array to hold categories that the user chooses
   //these are pulled from the id attribute of buttons the user clicks
@@ -348,39 +349,14 @@ $(document).ready(function () {
       "url": queryURL,
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer a3QTS8V50rV_Xf4jHgTIeYnfEPmEy74KhtAYhFuPJG2ai4R4NVzM4SebzmbeD5ZYDxjGd4O1ZU4ejWMq_5Z7JUUEwju02BaXT94shIGxKVpWhu7eLArA4JWxaDWuXHYx",
+        "Authorization": "Bearer hodnYhVW-c-Et4OCFML-TQZbYU3DEG1wTfLrKICbacDyO4m4KmrRZefHxnQmvcC7nCSGVbGKCJdchohtf-amP9BNgKvT7K17Ba35kTrXwR8mrDW7IGrlF7z9t961XHYx",
         "cache-control": "no-cache",
         "crossOrigin": "null",
         "Postman-Token": "a926db60-6442-448e-92fa-65bffe0a2bad"
       }
     }
 
-    $.ajax(settings).then(function (response) {
-      //loop through the list of JSON responses
-      var locations = response.businesses;
-      // console.log("response.businesses length: " + JSON.stringify(response.businesses).length);
-      // console.log("locations.length: " + JSON.stringify(locations.length));
-
-      // console.log(locations);
-      // getPOIdetails(locations)
-      // return locations;
-
-
-
-      if (JSON.stringify(response.businesses).length > 2) {
-        for (var i = 0; i < JSON.stringify(locations.length); i++) {
-          console.log(yelpResults.indexOf(locations[i]));
-          yelpResults.push(locations[i]);
-          console.log(yelpResults);
-          getPOIdetails(locations[i].id);
-        }
-      }
-      else {
-        console.log("No results in you your area for " + category);
-      }
-
-
-    })
+    return $.ajax(settings);
 
   }
 
@@ -435,7 +411,7 @@ $(document).ready(function () {
       "url": queryURL,
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer a3QTS8V50rV_Xf4jHgTIeYnfEPmEy74KhtAYhFuPJG2ai4R4NVzM4SebzmbeD5ZYDxjGd4O1ZU4ejWMq_5Z7JUUEwju02BaXT94shIGxKVpWhu7eLArA4JWxaDWuXHYx",
+        "Authorization": "Bearer hodnYhVW-c-Et4OCFML-TQZbYU3DEG1wTfLrKICbacDyO4m4KmrRZefHxnQmvcC7nCSGVbGKCJdchohtf-amP9BNgKvT7K17Ba35kTrXwR8mrDW7IGrlF7z9t961XHYx",
         "cache-control": "no-cache",
         "crossOrigin": "null",
         "Postman-Token": "a926db60-6442-448e-92fa-65bffe0a2bad"
@@ -545,108 +521,42 @@ $(document).ready(function () {
   }
 
   function yelpHandler() {
-    // console.log("yelpHandler");
-    // chosenCategories.forEach(function(selected){
-    //   var selected = selected;
-
-    //   activityCategory.forEach(function(item){
-    //     if(selected == item.category){
-
-    //       searchCategories.push(item.activity);
-    //   }
-    //   });
-
-
-    // })
-    // console.log(searchCategories.length);
-    // searchCategories.forEach(function(item){
-    //   yelpResults.push(getPOIsZIP(item,zipcode));
-    // });
-    // console.log(yelpResults);
-
-
-    //attemot at callback funtion
-    // function grabAll(callback){
-    //   console.log("grabAll");
-    //   searchCategories.forEach(function(item){
-    //     yelpResults.push(getPOIsZIP(item,zipcode));
-    //   });
-    //   return true;
-    // }
-    // function removeDups(){
-    //   console.log("here");
-    //   var sortedResults
-    //   yelpResults.forEach(function(result){
-    //        if (!sortedResults.includes(result)){
-    //          sortedResults.push(result);
-    //          console.log(result.id);
-    //        }
-    //      })
-
-    // }
-    // grabAll(removeDups());
-
-
-
-
-    /////////
-
+    //go through categories that the user selected
     chosenCategories.forEach(function (selected) {
       var selected = selected;
-
+      //go through all possible activity categories
       activityCategory.forEach(function (item) {
+        //see if they fall under one of the broader categories that the user selected
         if (selected == item.category) {
-
+          //add to the array of categories to be searched
           searchCategories.push(item.activity);
         }
       });
+    });
+    var categoryCalls = [];
+    searchCategories.forEach(function (item) {
+      categoryCalls.push(getPOIsZIP(item, zipcode));
+    });
 
-      searchCategories.forEach(function (item) {
-        getPOIsZIP(item, zipcode);
+    Promise.all(categoryCalls).then(function (categoryArray) {
+      //loop through the list of JSON responses
+      var categoryArray = categoryArray;
+
+      categoryArray.forEach(function (yelpObject) {
+        console.log(yelpObject);
       });
     });
+  
   }
 
 
-
-
-
-$("#submit").on("click", function (e) {
+  $("#submit").on("click", function (e) {
     e.preventDefault();
     $("#results").empty();
     if ($("#category-buttons").hasClass("show")) {
       $(this).text("Try something else?");
       $(this).removeClass("btn-success").addClass("btn-primary");
-      // yelpHandler();
-      var callYelp = new Promise(function (resolve, reject) {
-
-        chosenCategories.forEach(function (selected) {
-          var selected = selected;
-    
-          activityCategory.forEach(function (item) {
-            if (selected == item.category) {
-    
-              searchCategories.push(item.activity);
-            }
-            searchCategories.forEach(function (item) {
-              getPOIsZIP(item, zipcode);
-            });
-          });
-        });
-        if (yelpResults.length > 1) {
-          resolve("Received results from yelp API");
-        }
-        else {
-          reject(Error("There's nothing like that around here..."));
-        }
-      });
-    
-      callYelp.then(function(){
-        console.log(yelpResults);
-      }, function (error){
-        console.log(error);
-      }
-      );
+      yelpHandler();
     }
     else {
       $(this).text("Find something to do!");
