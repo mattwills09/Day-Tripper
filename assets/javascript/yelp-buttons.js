@@ -14,13 +14,13 @@ $(document).ready(function () {
 
   //SHARED GLOBAL VARIABLES
   var zipcode = localStorage.getItem("zip");
-  console.log(zipcode);
+  console.log("zipcode: "+zipcode);
   var lat = "";
   var long = "";
   var rainChance;
 
    /*** WEATHER WEATHER WEATHER***/
-   getWeather.zipSearch(zipcode);
+   
   //Takes a JSON object from the weather API and uses it to give the user suggestions on how to prepare for that day's weather
   function processWeatherData(response) {
     $(".city").text(response.city.name + "'s Current Weather");
@@ -138,6 +138,8 @@ $(document).ready(function () {
       });
     }
   }
+
+  getWeather.zipSearch(zipcode);
  
   ////////////////////
  /*** END WEATHER***/
