@@ -482,21 +482,21 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + 
       var phone = result.phone;
       var link = result.link;
 
-      var div = $("<div>");
+      var div = $("<div class='card card-body'>");
       div.attr({ "id": result.name });
 
       div.append(addName(name)).append(addAddress(street, city)).append(addPhone(phone)).append(addLink(link));
    
       $("#results").append(div);
       function addName(name) {
-        var nameTag = $("<h3>");
+        var nameTag = $("<h3 class='card-title'>");
         nameTag.text(name);
 
         return nameTag;
 
       }
       function addAddress(street, city) {
-        var addressTag = $("<p>");
+        var addressTag = $("<h6 class='card-subtitle mb-2 text-muted'>");
         addressTag.text(street + ", " + city);
 
         return addressTag;
