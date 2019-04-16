@@ -543,8 +543,8 @@ $(document).ready(function () {
               myList.splice(myList.indexOf(name),1);
               savedItem.remove();
             });
-          }
-          savedItem.appendTo("#myList");
+            savedItem.appendTo("#myList");
+          }          
         });
         
         return button;
