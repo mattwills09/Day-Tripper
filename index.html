@@ -24,62 +24,123 @@
 
 <body>
 
+  <nav class="navbar navbar-light bg-light">
+    <form class="form-inline">
+      <button id="btnLogoutNav" class="btn btn-sm btn-outline-secondary" type="button">Log Out</button>
+    </form>
+  </nav>
 
-  <div id="login-form" class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div id="alertArea" class="invisible">
-          <div id="alert" class="alert alert-primary" role="alert">
-          </div>
-        </div>
-        <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp"
-              placeholder="Enter email">
-          </div>
-
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="textPassword" placeholder="Password">
-          </div>
-
-          <button id="btnLogin" type="submit" class="btn btn-action">Log in</button>
-          <button id="btnSignup" type="submit" class="btn btn-secondary">Sign up</button>
-          <span id="logout" class="invisible">
-            <button id="btnLogout" type="submit" class="btn btn-action">Log Out</button>
-          </span>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  
-  <!-- Modal -->
-  <div class="modal fade" id="zipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <!-- Login Modal-->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
+
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Let's Plan a Day Trip!</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Login:</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
+          <div id="alertArea" class="invisible">
+            <div id="alert" class="alert alert-primary" role="alert">
+            </div>
+          </div>
+
+          <form>
             <div class="form-group">
-                <label for="zipcode">Where to?</label>
-                <input type="text" class="form-control" id="zip-input" placeholder="Zipcode">
-              </div>
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="txtEmailLgn" aria-describedby="emailHelp"
+                placeholder="Enter email">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="textPasswordLgn" placeholder="Password">
+              <br>
+              <button id="btnLogin" type="submit" class="btn btn-primary">Log in</button>
+              <span id="logout" class="invisible">
+                <button id="btnLogout" type="submit" class="btn btn-action">Log Out</button>
+              </span>
+            </div>
+          </form>
+
+          <div class="modal-footer">
+            <span>Don't have an account? </span><span id="sign-up-trig">Sign Up Here</span>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button id="btnGo" type="button" class="btn btn-primary">Let's Go!</button>
+      </div>
+    </div>
+
+    <!-- Sign-Up Modal-->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Sign-Up</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div id="alertArea" class="invisible">
+              <div id="alert" class="alert alert-primary" role="alert">
+              </div>
+            </div>
+
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="txtEmailSgu" aria-describedby="emailHelp"
+                  placeholder="Enter email">
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="textPasswordSgu" placeholder="Password">
+                <br>
+                <button id="btnsignUp" type="submit" class="btn btn-primary">Sign Up</button>
+              </div>
+            </form>
+
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div id="locatInput" class="card">
+          <div class="card-header">
+            Let's Go
+          </div>
+          <div class="card-body">
+            <div id="alertLocat" class="invisible">
+              <div id="alertLocatTxt" class="alert alert-primary" role="alert">
+              </div>
+            </div>
+            <h5 class="card-title">Where to?</h5>
+            <input type="text" class="form-control" id="zip-input" placeholder="Zipcode">
+            <button id="btnGo" type="button" class="btn btn-primary btn-lg btn-block">By ZipCode</button>
+            <p>or</p>
+            <button id="btnGeoGo" type="button" class="btn btn-primary btn-lg btn-block">By Geo Location</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
- 
-</div>
+
 
 
 </body>
