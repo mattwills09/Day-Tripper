@@ -24,20 +24,14 @@
 
 <body>
 
-  <nav class="navbar navbar-light bg-light">
-    <form class="form-inline">
-      <button id="btnLogoutNav" class="btn btn-sm btn-outline-secondary" type="button">Log Out</button>
-    </form>
-  </nav>
-
-  <!-- Login Modal-->
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  <!-- Sign-Up Modal-->
+  <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Login:</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Sign-Up</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -52,90 +46,62 @@
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="txtEmailLgn" aria-describedby="emailHelp"
+              <input type="email" class="form-control" id="txtEmailSgu" aria-describedby="emailHelp"
                 placeholder="Enter email">
             </div>
 
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="textPasswordLgn" placeholder="Password">
+              <input type="password" class="form-control" id="textPasswordSgu" placeholder="Password">
               <br>
-              <button id="btnLogin" type="submit" class="btn btn-primary">Log in</button>
-              <span id="logout" class="invisible">
-                <button id="btnLogout" type="submit" class="btn btn-action">Log Out</button>
-              </span>
+              <button id="btnsignUp" type="submit" class="btn btn-primary">Sign Up</button>
             </div>
           </form>
 
-          <div class="modal-footer">
-            <span>Don't have an account? </span><span id="sign-up-trig">Sign Up Here</span>
-          </div>
         </div>
       </div>
     </div>
 
-    <!-- Sign-Up Modal-->
-    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Sign-Up</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <div id="alertArea" class="invisible">
-              <div id="alert" class="alert alert-primary" role="alert">
-              </div>
-            </div>
-
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="txtEmailSgu" aria-describedby="emailHelp"
-                  placeholder="Enter email">
-              </div>
-
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="textPasswordSgu" placeholder="Password">
-                <br>
-                <button id="btnsignUp" type="submit" class="btn btn-primary">Sign Up</button>
-              </div>
-            </form>
-
-            <div class="modal-footer">
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+  </div>
   </div>
 
   <div class="container">
+
     <div class="row">
-      <div class="col-md-4">
-        <div id="locatInput" class="card">
+      <div class="col-md-6 mx-auto">
+        <h1 class="mb-4 mt-4 text-center">Daytripper</h1>
+        <div id="locatInput" class="card mt-2">
           <div class="card-header">
-            Let's Go
+            <h5 class="card-title">Let's Go</h5>
           </div>
           <div class="card-body">
-            <div id="alertLocat" class="invisible">
-              <div id="alertLocatTxt" class="alert alert-primary" role="alert">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address <span id="invalidEmail" class="warning hidden">- please enter a valid email address</span></label>
+                <input type="email" class="form-control" id="txtEmailLgn" aria-describedby="emailHelp"
+                  placeholder="Enter email" required>
               </div>
-            </div>
-            <h5 class="card-title">Where to?</h5>
-            <input type="zipcode" class="form-control" id="zip-input" placeholder="Zipcode">
 
-            <button id="btnGo" type="button" class="btn btn-primary btn-lg btn-block">By ZipCode</button>
-            <p>or</p>
-            <button id="btnGeoGo" type="button" class="btn btn-primary btn-lg btn-block">By Geo Location</button>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password <span id="invalidPassword" class="warning hidden">- incorrect password</span></label>
+                <input type="password" class="form-control" id="textPasswordLgn" placeholder="Password" required>
+
+
+              </div>
+
+              <div class="form-group">
+                <label for="exampleZipcode">Zipcode <span id="invalidZipcode" class="warning hidden">- please enter a 5-digit zipcode</span></label>
+                <input type="zipcode" class="form-control" id="zip-input" placeholder="Zipcode" required>
+                <br>
+                <button id="btnLogin" type="submit" class="btn btn-primary">Log in</button>
+              </div>
+
+            </form>
+
+          </div>
+          <div class="card-footer">
+            <span>Don't have an account? </span><button class="btn btn-outline-primary" id="sign-up-trig">Sign Up
+              Here</button>
           </div>
         </div>
       </div>
