@@ -425,6 +425,7 @@ $(document).ready(function () {
       var results = [];
       results.push(poi);
       publishResults(results);
+      console.log(results);
     });
 
   }
@@ -481,7 +482,7 @@ $(document).ready(function () {
       var city = result.city;
       var phone = result.phone;
       var hours = result.hours;
-      var open = result.hours.is_open_now;
+      var open = result.hours[0].is_open_now;
       var link = result.link;
 
       var div = $("<div class='card card-body m-2'>");
@@ -497,8 +498,8 @@ $(document).ready(function () {
         nameTag.text(name);
         //console.log(nameTag);
         if(open){
-          var openTag = $("<span class='badge badge-success'>");
-          openTag.text(open);    
+          var openTag = $("<span class='badge badge-success ml-2'>");
+          openTag.text("open");    
           nameTag.append(openTag);
           
         }
