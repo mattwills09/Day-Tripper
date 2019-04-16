@@ -68,17 +68,22 @@ $(document).ready(function () {
                   }
             })
             .catch(function (error) {
+                $("#invalidEmail").addClass("hidden");
+                $("#invalidPassword").addClass("hidden");
                 console.log(error);
                 if(error.code == "auth/invalid-email"){
                     //bad email
                     console.log("bad email");
+                    $("#invalidEmail").removeClass("hidden");
                 }
-                else if (error.code == "auth/wrong-password"){
+                if (error.code == "auth/wrong-password"){
                     //bad password
                     console.log("bad password");
+                    $("#invalidPassword").removeClass("hidden");
                 }
                 // Handle Errors here.
-                else if (error.code == "auth/user-not-found"){
+                if (error.code == "auth/user-not-found"){
+                    console.log("new user");
                     $("#alertArea").removeClass("invisible");
                     $("#alert").text("Hold on -- Let's Get You Signed Up...");
                     $('#signUpModal').modal('show');
@@ -92,6 +97,7 @@ $(document).ready(function () {
         };
 
         if (checkZip(zip)==true) {
+            $("#invalidZipcode").addClass("hidden");
            var corrZip=zip
            console.log(corrZip)
 
@@ -106,8 +112,9 @@ $(document).ready(function () {
            zipOkay = true;
 
           } else { 
-            $("#alertLocat").removeClass("invisible");
-            $("#alertLocatTxt").text("Not a valid zip code -- try again.");
+            $("#invalidZipcode").removeClass("hidden");
+            // $("#alertLocat").removeClass("invisible");
+            // $("#alertLocatTxt").text("Not a valid zip code -- try again.");
           };
 
         
