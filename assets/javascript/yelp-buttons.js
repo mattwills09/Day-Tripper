@@ -12,7 +12,6 @@ $("#btnLogout").on("click", function (event) {
       })
 });
 
-zipSearch(19010);
   //SHARED GLOBAL VARIABLES
   var zipcode = "";
   var lat = "";
@@ -198,81 +197,81 @@ zipSearch(19010);
 
 
  /*** WEATHER WEATHER WEATHER***/
-
- function processData(response){
-  $(".city").text(response.city.name + "'s Current Weather");
-  $(".temp3").text("Current Temperature (F): " + response.list[0].main.temp);
-  $(".conditions").text("Current Conditions: " + response.list[0].weather[0].description);
-
-  $(".temp6").text("Forecasted Temperature (Next 6 hrs): " + response.list[1].main.temp);
-  $(".conditions").text("Forecasted Conditions: " + response.list[1].weather[0].description);
-
-
-  //-----------------------------------------------------------------
-
-  var suggestionDay = response.list[0].main.temp;
-
-  if (suggestionDay >= 60)
-      $(".suggestDay").text("Woot!  Jen's kids can wear SHORTS today!");
-  else
-      $(".suggestDay").text("No shorts today, looks like you should bring a jacket also.. bummer");
-
-  var suggestionNight = response.list[0].main.temp;
-
-  if (suggestionNight >= 60)
-      $(".suggestNight").text("Keep those shorts for later!");
-  else
-      $(".suggestNight").text("Most likely you'll need a jacket or sweater later, looks a little chilly.");
-
-  //-----------------------------------------------------------------
-  // 3-hour / Current Weather
-  var cloudCover = response.list[0].clouds.all;
-  rainChance = response.list[0].weather[0].main;//update global 
-  // 6-hour / Forecasted Weather
-  var cloudCover6 = response.list[1].clouds.all;
-  var rainChance6 = response.list[1].weather[0].main;
-
-
-
-  if (rainChance == "Rain") {
-      $("#welcomeWeather").attr("src", "assets/images/rainy.png");  
+ //Takes a JSON object from the weather API and uses it to give the user suggestions on how to prepare for that day's weather
+ function processWeatherData(response){
+    $(".city").text(response.city.name + "'s Current Weather");
+    $(".temp3").text("Current Temperature (F): " + response.list[0].main.temp);
+    $(".conditions").text("Current Conditions: " + response.list[0].weather[0].description);
+  
+    $(".temp6").text("Forecasted Temperature (Next 6 hrs): " + response.list[1].main.temp);
+    $(".conditions").text("Forecasted Conditions: " + response.list[1].weather[0].description);
+  
+  
+    //-----------------------------------------------------------------
+  
+    var suggestionDay = response.list[0].main.temp;
+  
+    if (suggestionDay >= 60)
+        $(".suggestDay").text("Woot!  Jen's kids can wear SHORTS today!");
+    else
+        $(".suggestDay").text("No shorts today, looks like you should bring a jacket also.. bummer");
+  
+    var suggestionNight = response.list[0].main.temp;
+  
+    if (suggestionNight >= 60)
+        $(".suggestNight").text("Keep those shorts for later!");
+    else
+        $(".suggestNight").text("Most likely you'll need a jacket or sweater later, looks a little chilly.");
+  
+    //-----------------------------------------------------------------
+    // 3-hour / Current Weather
+    var cloudCover = response.list[0].clouds.all;
+    rainChance = response.list[0].weather[0].main;//update global 
+    // 6-hour / Forecasted Weather
+    var cloudCover6 = response.list[1].clouds.all;
+    var rainChance6 = response.list[1].weather[0].main;
+  
+  
+  
+    if (rainChance == "Rain") {
+        $("#welcomeWeather").attr("src", "assets/images/rainy.png");  
+    }
+    else if(cloudCover >= 75) {
+        $("#welcomeWeather").attr("src", "assets/images/cloudy.png");
+     }
+    else if(cloudCover >= 50) {
+        $("#welcomeWeather").attr("src", "assets/images/partly-cloudy.png");
+     }
+    else {
+        $("#welcomeWeather").attr("src", "assets/images/sunny.jpg");
+    }
+  
+    if (rainChance6 == "Rain") {
+        $("#forecastWeather").attr("src", "assets/images/rainy.png");  
+    }
+    else if(cloudCover6 >= 75) {
+        $("#forecastWeather").attr("src", "assets/images/cloudy.png");
+     }
+    else if(cloudCover6 >= 50) {
+        $("#forecastWeather").attr("src", "assets/images/partly-cloudy.png");
+     }
+    else {
+        $("#forecastWeather").attr("src", "assets/images/sunny.jpg");
+    }
   }
-  else if(cloudCover >= 75) {
-      $("#welcomeWeather").attr("src", "assets/images/cloudy.png");
-   }
-  else if(cloudCover >= 50) {
-      $("#welcomeWeather").attr("src", "assets/images/partly-cloudy.png");
-   }
-  else {
-      $("#welcomeWeather").attr("src", "assets/images/sunny.jpg");
-  }
-
-  if (rainChance6 == "Rain") {
-      $("#forecastWeather").attr("src", "assets/images/rainy.png");  
-  }
-  else if(cloudCover6 >= 75) {
-      $("#forecastWeather").attr("src", "assets/images/cloudy.png");
-   }
-  else if(cloudCover6 >= 50) {
-      $("#forecastWeather").attr("src", "assets/images/partly-cloudy.png");
-   }
-  else {
-      $("#forecastWeather").attr("src", "assets/images/sunny.jpg");
-  }
-};
-
+  //object with two methods, zipSearch to make API call based on zip, and geoSearch to make API call based on geolocation
+var getWeather = {
 //-----------------ZIP CODE API QUERY------------------------
 
 
-function zipSearch(zipCode){
+zipSearch: function(zipCode){
 var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
 
   $.ajax({
   url: queryURL,
   method: "GET"
   }).then(function(response) {
-
-      processData(response)
+      processWeatherData(response)
 
         if(rainChance == "Clear"){
           outdoorsActivities.forEach(function (item) {
@@ -297,11 +296,11 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode
           });         
       }
   });
-}
+},
 
 //-----------------LATITUDE/LONGITUDE API QUERY------------------------
 
-function geoSearch(latitude, longitude){
+geoSearch: function(latitude, longitude){
 var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
 
   $.ajax({
@@ -309,11 +308,15 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast/hourly?lat=" + 
   method: "GET"
   }).then(function(response) {
 
-      processData(response);
+      processWeatherData(response);
 
 
   });
 }
+}
+
+//Calls firebase for user's location and makes a weather call
+getWeather.zipSearch(97035);
 
 
   /****  YELP  FUNCTIONALITY ****/
