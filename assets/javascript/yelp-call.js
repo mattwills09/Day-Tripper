@@ -168,7 +168,7 @@ $(document).ready(function () {
     console.log("makeButton");
     var btn = $("<button>");
     btn.text(name);
-    btn.attr({ "id": name, "data-selected": "false" });//set default to data-selected = false
+    btn.attr({ "id": name, "data-selected": "false", "class": "btn btn-outline-primary" });//set default to data-selected = false
 
     //add click listeners to each button
     btn.on("click", function () {
@@ -279,7 +279,7 @@ $(document).ready(function () {
         var newBtn = $("<button>");
 
         //console.log("clkCls: " + this.clkCls);
-        newBtn.addClass(this.clkCls);
+        newBtn.addClass(this.clkCls+" btn btn-outline-primary");
 
         //console.log("stylCls: " + this.stylCls);
         newBtn.addClass(this.stylCls);
