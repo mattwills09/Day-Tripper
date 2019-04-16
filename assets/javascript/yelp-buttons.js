@@ -616,6 +616,8 @@ $(document).ready(function () {
 
   $("#submit").on("click", function (e) {
     e.preventDefault();
+    $(".spinner-grow text-primary").show();
+
     $("#results").empty();
     if ($("#category-buttons").hasClass("show")) {
       $(this).text("Try something else?");
