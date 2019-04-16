@@ -473,7 +473,7 @@ $(document).ready(function () {
 
   function publishResults(POIs) {
     //console.log("publishResults");
-
+    var myList = [];
     //for each of the yelp results
     POIs.forEach(function (result) {
 
@@ -488,7 +488,7 @@ $(document).ready(function () {
       var div = $("<div class='card card-body m-2'>");
       div.attr({ "id": result.name });
 
-      div.append(addName(name,open)).append(addAddress(street, city)).append(addPhone(phone)).append(addLink(link));
+      div.append(addName(name,open)).append(addAddress(street, city)).append(addPhone(phone)).append(addLink(link)).append(addListButton());
       //console.log("publishResults div: " + JSON.stringify(div));
       $("#results").append(div);
 
@@ -525,18 +525,29 @@ $(document).ready(function () {
 
         return phoneTag;
       }
-      function addHours(hours){
-        var hoursTag = $("<p>");
-
-
-        return hoursTag;
-      }
       function addLink(link) {
         //console.log("addLink");
         var linkTag = $("<a>");
         linkTag.attr({ "href": link }).text("Open in Yelp");
 
         return linkTag;
+      }
+      function addListButton(){
+        var button = $("<button class='btn btn-outline-primary mt-2'>");
+        button.text("Add to My List");
+        button.on("click",function(){
+          if(myList.indexOf(name) == -1){
+            myList.push(name);
+            var savedItem = $(this).closest("div").clone();
+            $(savedItem.find("button")).text("Remove").on("click",function(){
+              myList.splice(myList.indexOf(name),1);
+              savedItem.remove();
+            });
+            savedItem.appendTo("#myList");
+          }          
+        });
+        
+        return button;
       }
     });
   }
