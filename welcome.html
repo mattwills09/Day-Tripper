@@ -16,109 +16,110 @@
 
 
     <div class="container">
-      
-    <div class="jumbotron">
-        <nav class="navbar navbar-light bg-light">
-   
-                    <button id="btnLogout" class="btn btn-sm btn-outline-secondary" type="button">Logout</button>
-             
-                                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myListModal">
-                                    My List
-                                  </button>
+
+        <div class="jumbotron">
+            <nav class="navbar navbar-light bg-light">
+
+                <button id="btnLogout" class="btn btn-sm btn-outline-secondary" type="button">Logout</button>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myListModal">
+                    My List
+                </button>
             </nav>
 
-        <div class="welcomeButtons">
+            <div class="welcomeButtons">
 
-            <div class="row">
-                <div class="col-md-4">
-                    <img id="welcomeWeather">
-                </div>
-
-
-                <div class="col-md-6">
-                    <div class="city"></div><br>
-                    <div class="temp3">Temperature: </div>
-                    <div class="conditions">Current Conditions: </div>
-                    <div class="suggestDay">Suggestion: </div>
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="suggestion">
-                        <h2 class="display-4"></h2>
-                    </div>
-                    <hr class="my-4">
-
-                </div>
-            </div>
-
-            <div class="card card-body">
-                <div class="collapse show" id="category-buttons">
-
-                    <div class="row">
-                        <div id="categories-1" class="col-md-12">
-                            <p class="lead"><em>How about..</em></p>
-
-                        </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img id="welcomeWeather">
                     </div>
 
-                    <div class="row pb-4">
-                        <div id="categories-2" class="col-md-12">
-                            <hr class="my-4">
-                            <p>Or... </p>
 
-                        </div>
+                    <div class="col-md-6">
+                        <div class="city"></div><br>
+                        <div class="temp3">Temperature: </div>
+                        <div class="conditions">Current Conditions: </div>
+                        <div class="suggestDay">Suggestion: </div>
+
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-12">
-                        <button class="btn btn-success" type="button" data-toggle="collapse"
-                            data-target="#category-buttons" aria-expanded="true" aria-controls="category-buttons"
-                            id="submit">
-                            Find something to do!
-                        </button>
+                        <div class="suggestion">
+                            <h2 class="display-4"></h2>
+                        </div>
+                        <hr class="my-4">
 
                     </div>
                 </div>
+
+                <div class="card card-body">
+                    <div class="collapse show" id="category-buttons">
+
+                        <div class="row">
+                            <div id="categories-1" class="col-md-12">
+                                <p class="lead"><em>How about..</em></p>
+
+                            </div>
+                        </div>
+
+                        <div class="row pb-4">
+                            <div id="categories-2" class="col-md-12">
+                                <hr class="my-4">
+                                <p>Or... </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-success" type="button" data-toggle="collapse"
+                                data-target="#category-buttons" aria-expanded="true" aria-controls="category-buttons"
+                                id="submit">
+                                Find something to do!
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
         </div>
-    </div>
 
-            <div class="row">
-                <div id="results" class="col-md-12">
+        <div class="row">
+            <div id="results" class="col-md-12">
 
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myListModal" tabindex="-1" role="dialog" aria-labelledby="myListTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myListTitle">My List</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="myList">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
-
-
-
-
-
-
-      
-      <!-- Modal -->
-      <div class="modal fade" id="myListModal" tabindex="-1" role="dialog" aria-labelledby="myListTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="myListTitle">My List</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body" id="myList">
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
         </div>
-      </div>
 
     </div>
 
