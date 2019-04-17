@@ -121,7 +121,7 @@ $(document).ready(function () {
     });
 
     //Trigger Sign-Up
-    $(".card-footer > #sign-up-trig").on("click", function (event) {
+    $("#sign-up-trig").on("click", function (event) {
         event.preventDefault();
         console.log("click");
         $('#signUpModal').modal('show');
