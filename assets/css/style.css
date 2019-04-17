@@ -1,7 +1,9 @@
 * {
     box-sizing: border-box;
 }
-
+body{
+    background-image: linear-gradient(to bottom , #ffc126,#ff9226);
+}
 #welcomeWeather, #weather-icon {
     width: 100px;
     height: 100px;
@@ -27,7 +29,6 @@
 }
 
 .city {
-    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 16pt;
     text-decoration: underline;
 }
