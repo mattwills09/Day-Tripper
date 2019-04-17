@@ -12,10 +12,92 @@ body, html{
     background-image: linear-gradient(to bottom , #ffc126,#ff9226);
    
 }
-#welcomeWeather, #weather-icon {
-    width: 100px;
-    height: 100px;
-    float: right;
+
+.jumbotron, .thingsContainer, .myListContainer, #login-form {
+    margin:auto;
+    background-color:white;
+    border:2px solid blue;
+    width:80%;
+    padding:20px;
+    padding-bottom:0px;
+    margin-top:5px;
+    text-align:center;
+    box-shadow: 10px 10px 5px grey;
+}
+
+#login-form {
+    padding-bottom:20px;
+}
+
+h1 {
+    font-weight:bold;
+    text-decoration:underline;
+    margin-left:-100px;
+    font-family:helvetica;
+}
+
+.hLine {
+    border:1px solid blue;
+    width:85%;
+    margin-bottom:3%;
+}
+
+#results, #my-list-results {
+    text-align:left;
+    padding-bottom:25px;
+}
+
+#headerWeather {
+    text-align:left;
+}
+
+#welcomeWeather, #weather-icon, #forecastWeather {
+    width:100px;
+    height:100px;
+    float:right;
+    /* margin-right:10px; */
+}
+
+#topsIcon, #bottomsIcon {
+    width:40px;
+    height:40px;
+    display:block;
+    margin-left:8px;
+}
+
+#logo {
+    width:150px;
+    height:150px;
+    opacity:0.85;
+    float:left;
+    margin-left:5px;
+}
+
+.logoBanner {
+    display:flex;
+    align-items:center;
+    text-align:center;
+    width:725px;
+}
+
+#pageLogo {
+    position:absolute;
+    right:0;
+    bottom:0;
+    opacity:0.3;
+    width:382px;
+    height:354px;
+}
+
+.watermark {
+    position: relative;
+    padding-bottom:25px;
+}
+
+.clothingSuggestion {
+    display:flex;
+    align-items:flex-start;
+
 }
 
 .containerIndex {
@@ -31,7 +113,10 @@ body, html{
     padding: 10px;
     margin-top: 30px;
 }
-
+.suggestDay {
+    font-style:italic;
+    margin-right:3px;
+}
 .welcomeButtons {
     text-align: center;
 }
@@ -41,7 +126,6 @@ body, html{
 }
 .pink:hover{
     background: #ff0c6c;
-
     border-color: #ff0c6c;
 }
 .orange{
@@ -55,8 +139,8 @@ body, html{
     color: 3fff;
 }
 .city {
-    font-size: 16pt;
-    text-decoration: underline;
+    font-size:20pt;
+    text-decoration:underline;
 }
 #logo{
     color: #fff;
