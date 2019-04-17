@@ -14,7 +14,7 @@
 
 <body>
 
-
+    <div id="background"></div>
     <div class="container">
         <nav class="navbar navbar-light bg-light">
 
@@ -28,7 +28,7 @@
 
             <div class="welcomeButtons">
 
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col-md-4">
                         <img id="welcomeWeather">
                     </div>
@@ -47,43 +47,46 @@
                         <div class="suggestion">
                             <h2 class="display-4"></h2>
                         </div>
-                        <hr class="my-4">
 
                     </div>
                 </div>
 
-                <div class="card card-body">
-                    <div class="collapse show" id="category-buttons">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-body">
+                            <div class="collapse show" id="category-buttons">
 
-                        <div class="row">
-                            <div id="categories-1" class="col-md-12">
-                                <p class="lead"><em>How about..</em></p>
+                                <div class="row">
+                                    <div id="categories-1" class="col-md-12">
+                                        <p class="lead"><em>How about..</em></p>
 
+                                    </div>
+                                </div>
+
+                                <div class="row pb-4">
+                                    <div id="categories-2" class="col-md-12">
+                                        <hr class="my-4">
+                                        <p>Or... </p>
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-success" type="button" data-toggle="collapse"
+                                        data-target="#category-buttons" aria-expanded="true"
+                                        aria-controls="category-buttons" id="submit">
+                                        Find something to do!
 
-                        <div class="row pb-4">
-                            <div id="categories-2" class="col-md-12">
-                                <hr class="my-4">
-                                <p>Or... </p>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button class="btn btn-success" type="button" data-toggle="collapse"
-                                data-target="#category-buttons" aria-expanded="true" aria-controls="category-buttons"
-                                id="submit">
-                                Find something to do!
-                                
-                            </button>
-                            <div class="loading hidden">
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
+                                    </button>
+                                    <div class="loading hidden">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,14 +94,14 @@
 
             </div>
             <div class="row">
-                   
-                    <div id="results" class="col-md-12">
-                            
-                    </div>
-                  
-        
+
+                <div id="results" class="col-md-12">
+
                 </div>
-        
+
+
+            </div>
+
         </div>
 
 
