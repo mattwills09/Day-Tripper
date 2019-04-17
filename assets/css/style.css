@@ -13,9 +13,10 @@ body, html{
    
 }
 #welcomeWeather, #weather-icon {
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: 75%;
     float: right;
+
 }
 
 .containerIndex {
@@ -58,6 +59,16 @@ body, html{
     font-size: 16pt;
     text-decoration: underline;
 }
+.clothingSuggestion {
+    display:flex;
+    align-items:flex-start;
+ }
+ #topsIcon, #bottomsIcon {
+    height:60px;
+    width: auto;
+    display:block;
+    margin-left:8px;
+ }
 #logo{
     color: #fff;
     font-weight: bold;
