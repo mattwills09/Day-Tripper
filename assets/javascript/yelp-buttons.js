@@ -625,6 +625,8 @@ $(document).ready(function () {
         //use the business id to make a second ajax call
         getPOIdetails(yelpResultsValues[i].id);
       }
+      $(".loading").addClass("hidden");
+      $("#submit").removeClass("hidden");
     });
 
   }
@@ -633,20 +635,25 @@ $(document).ready(function () {
   $("#submit").on("click", function (e) {
     e.preventDefault();
 
-    $(".spinner-grow text-primary").removeClass("hidden");
-
+ 
+    console.log("click");
     //empty out previous results
     $("#results").empty();
     //if the category buttons are showing, then we switch to results state
     if ($("#category-buttons").hasClass("show")) {
+      $(".loading").removeClass("hidden");//show loading dots
       $(this).text("Try something else?");//change text to indicate that user can click to re-open the category buttons and make a new search
       $(this).removeClass("btn-success").addClass("btn-primary");
+      $(this).addClass("hidden");//hide until results come back
       yelpHandler();//call the yelpHandler to search for selected categories on yelp
     }
     else {
+
       //switch back to search state
+      $(".loading").addClass("hidden");//hide loading dots
       $(this).text("Find something to do!");//change text to indicate user can click to make yelp call
       $(this).removeClass("btn-primary").addClass("btn-success");
+
     }
 
   });
