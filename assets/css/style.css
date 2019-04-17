@@ -35,7 +35,15 @@ body, html{
 .welcomeButtons {
     text-align: center;
 }
+.pink{
+    background: #ff267c;
+    border-color: #ff267c;
+}
+.pink:hover{
+    background: #ff0c6c;
 
+    border-color: #ff0c6c;
+}
 .city {
     font-size: 16pt;
     text-decoration: underline;
