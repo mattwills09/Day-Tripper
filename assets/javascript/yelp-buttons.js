@@ -151,7 +151,7 @@ $(document).ready(function () {
   //array to hold POI (point of interest) objects
   var yelpResults = {};
   var searchCategories = [];
-
+  var myList = []; //arry of POIs that user saved
 
   //array to hold categories that the user chooses
   //these are pulled from the id attribute of buttons the user clicks
@@ -475,7 +475,6 @@ $(document).ready(function () {
 
   function publishResults(POIs) {
 
-    var myList = []; //arry of POIs that user saved
     
     //for each of the yelp results
     POIs.forEach(function (result) {
@@ -490,7 +489,7 @@ $(document).ready(function () {
 
       //make bootstrap card
       var div = $("<div class='card card-body m-2'>");
-      div.attr({ "id": result.name });
+      div.attr({ "data-id": result.name });
 
       //append elements for each piece of data we want shown
       div.append(addName(name,open)).append(addAddress(street, city)).append(addPhone(phone)).append(addLink(link)).append(addListButton());
@@ -553,16 +552,39 @@ $(document).ready(function () {
               myList.splice(myList.indexOf(name),1);
               //remove item from DOM
               savedItem.remove();
+              if(myList.length < 2){
+                $("#emptyList").removeClass("hidden");
+              }
+              else{
+                $("#emptyList").addClass("hidden");
+              }
+              var removedID = $(savedItem).attr("data-id");
+
+              // $("div[data-id]='"+removedID+"'").find("button").attr("disabled",false);
+             $('[data-id="'+removedID+'"]').find("button").attr("disabled",false).text("Add to my list");
+             
             });
             //add div to my list
             savedItem.appendTo("#myList");
-          }          
+            $(this).text("Added to your list");
+            $(this).attr("disabled",true);
+          }
+   
         });
         
         return button; //return to be appended to card
       }
     });
   }
+
+  $("#myListButton").on("click", function(){
+    if(myList.length < 1){
+      $("#emptyList").removeClass("hidden");
+    }
+    else{
+      $("#emptyList").addClass("hidden");
+    }
+  });
 
   //creates a promise to wait a certain amount of time before pushing them to the DOM
   function sleep(ms) {
