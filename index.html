@@ -69,7 +69,7 @@
 
     <div class="row">
       <div class="col-md-6 mx-auto">
-        <h1 class="mb-4 mt-4 text-center">Daytripper</h1>
+        <h1 class="mb-4 mt-4 text-center" id="logo">Daytripper</h1>
         <div id="locatInput" class="card mt-2">
           <div class="card-header">
             <h5 class="card-title">Let's Go</h5>
@@ -93,16 +93,15 @@
                 <label for="exampleZipcode">Zipcode <span id="invalidZipcode" class="warning hidden">- please enter a 5-digit zipcode</span></label>
                 <input type="zipcode" class="form-control" id="zip-input" placeholder="Zipcode" required>
                 <br>
-                <button id="btnLogin" type="submit" class="btn btn-primary">Log in</button>
+                
+                <button class="btn btn-outline-secondary float-right m-2" id="sign-up-trig">Sign Up</button>
+                <button id="btnLogin" type="submit" class="btn btn-primary float-right m-2">Log in</button>
               </div>
 
             </form>
 
           </div>
-          <div class="card-footer">
-            <span>Don't have an account? </span><button class="btn btn-outline-primary" id="sign-up-trig">Sign Up
-              Here</button>
-          </div>
+
         </div>
       </div>
     </div>
