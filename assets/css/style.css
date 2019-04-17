@@ -1,8 +1,16 @@
 * {
     box-sizing: border-box;
 }
-body{
+body, html{
+    height:100%;
+}
+#background{
+    position:fixed;
+    z-index: -10;
+    height: 100%;
+    width: 100%;
     background-image: linear-gradient(to bottom , #ffc126,#ff9226);
+   
 }
 #welcomeWeather, #weather-icon {
     width: 100px;
@@ -32,7 +40,9 @@ body{
     font-size: 16pt;
     text-decoration: underline;
 }
-
+#logo{
+    color: #fff;
+}
 .warning {
     color: red;
 }
@@ -69,7 +79,7 @@ body{
 .dot{
     height: 15px;
     width: 15px;
-    background-color: blue;
+    background-color: #ff267c;
     border-radius: 50%;
     display: inline-block;
     margin: 10px;
