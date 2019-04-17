@@ -24,69 +24,90 @@
 
 <body>
 
-
-  <div id="login-form" class="container">
-    <div class="row">
-      <div class="col-md-4 mx-auto">
-        <div id="alertArea" class="invisible">
-          <div id="alert" class="alert alert-primary" role="alert">
-          </div>
-        </div>
-
-        <div class="logoBanner">
-          <em><h1>Welcome to DayTripper!</h1></em>
-          <img id="logo" src="assets/images/compass2.png">
-        </div>
-        <br>
-
-        <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email Address:</label>
-            <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp"
-              placeholder="Enter email">
-          </div>
-
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password:</label>
-            <input type="password" class="form-control" id="textPassword" placeholder="Password">
-          </div>
-
-          <button id="btnLogin" type="submit" class="btn btn-action">Log in</button>
-          <button id="btnSignup" type="submit" class="btn btn-secondary">Sign up</button><br>
-          <span id="logout" class="invisible">
-            <button id="btnLogout" type="submit" class="btn btn-action">Log Out</button>
-          </span>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  
-  <!-- Modal -->
-  <div class="modal fade" id="zipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div id="background"></div>
+  <!-- Sign-Up Modal-->
+  <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
+
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Let's Plan a Day Trip!</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Sign-Up</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
+          <div id="alertArea" class="invisible">
+            <div id="alert" class="alert alert-primary" role="alert">
+            </div>
+          </div>
+
+          <form>
             <div class="form-group">
-                <label for="zipcode">Where to?</label>
-                <input type="text" class="form-control" id="zip-input" placeholder="Zipcode">
-              </div>
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="txtEmailSgu" aria-describedby="emailHelp"
+                placeholder="Enter email">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="textPasswordSgu" placeholder="Password">
+              <br>
+              <button id="btnsignUp" type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+          </form>
+
         </div>
-        <div class="modal-footer">
-          <button id="btnGo" type="button" class="btn btn-primary">Let's Go!</button>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <h1 class="mb-4 mt-4 text-center" id="logo">Daytripper</h1>
+        <div id="locatInput" class="card mt-2">
+          <div class="card-header">
+            <h5 class="card-title">Let's Go</h5>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address <span id="invalidEmail" class="warning hidden">- please enter a valid email address</span></label>
+                <input type="email" class="form-control" id="txtEmailLgn" aria-describedby="emailHelp"
+                  placeholder="Enter email" required>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password <span id="invalidPassword" class="warning hidden">- incorrect password</span></label>
+                <input type="password" class="form-control" id="textPasswordLgn" placeholder="Password" required>
+
+
+              </div>
+
+              <div class="form-group">
+                <label for="exampleZipcode">Zipcode <span id="invalidZipcode" class="warning hidden">- please enter a 5-digit zipcode</span></label>
+                <input type="zipcode" class="form-control" id="zip-input" placeholder="Zipcode" required>
+                <br>
+                
+                <button class="btn btn-outline-secondary float-right m-2" id="sign-up-trig">Sign Up</button>
+                <button id="btnLogin" type="submit" class="btn btn-primary float-right m-2">Log in</button>
+              </div>
+
+            </form>
+
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-  
- 
-</div>
+
 
 
 </body>

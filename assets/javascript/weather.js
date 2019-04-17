@@ -1,5 +1,3 @@
-//-----------------SHOWING/PROCESSING WEATHER INFO------------------------
-
 function processData(response) {
 
     $(".city").text(response.city.name + "'s Weather");
@@ -72,8 +70,6 @@ function processData(response) {
 
 //-----------------ZIP CODE API QUERY------------------------
 
-zipSearch(19125);
-
 function zipSearch(zipCode){
 var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + "&units=imperial&appid=6832cd13112f3ff58acaee5e7646c57a";
 
@@ -81,7 +77,7 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode
     url: queryURL,
     method: "GET"
     }).then(function(response) {
-
+        console.log("ajax call");
         processData(response);
         console.log(response);
 
