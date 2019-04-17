@@ -24,7 +24,7 @@
            <div>
                 <button id="btnLogout" class="btn btn-outline-secondary orange" type="button">Logout</button>
            
-            <button type="button" class="btn btn-primary pink" data-toggle="modal" data-target="#myListModal">
+            <button type="button" class="btn btn-primary pink" data-toggle="modal" data-target="#myListModal" id="myListButton">
                 My List
             </button>
            </div>
@@ -127,11 +127,10 @@
                         </button>
                     </div>
                     <div class="modal-body" id="myList">
-
+                        <span id="emptyList">You don't have anything saved!</span>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
