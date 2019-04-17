@@ -45,9 +45,14 @@ body, html{
     border-color: #ff0c6c;
 }
 .orange{
-    /* background: #ff9328; */
     background: none;
-    height: 75px;
+    color: #fff;
+    border-color: #fff;
+}
+.orange:hover{
+    background: #ff9226;
+    border-color: #ff9226;
+    color: 3fff;
 }
 .city {
     font-size: 16pt;
