@@ -37,36 +37,58 @@
 }
 
 .hidden {
-    display: none;
+    display:none;
 }
 
 @keyframes grow {
     0% {
         opacity: .2;
-        -ms-transform: scale(1, 1);/* IE 9 */
-        -webkit-transform: scale(1, 1);/* Safari */
-        transform: scale(1, 1);
+        -ms-transform: scale(.5, .5) translateY(5px);/* IE 9 */
+        -webkit-transform: scale(.5, .5) translateY(5px);/* Safari */
+        transform: scale(.5, .5) translateY(5px);
     }
-    20% {
+    30% {
         opacity: 1;
-        -ms-transform: scale(2, 2);/* IE 9 */
-        -webkit-transform: scale(2, 2);/* Safari */
-        transform: scale(2, 2);
+        -ms-transform: scale(1.5, 1.5) translateY(-10px);/* IE 9 */
+        -webkit-transform: scale(1.5, 1.5) translateY(-10px);/* Safari */
+        transform: scale(1.5, 1.5) translateY(-10px);
+    }
+    80%{
+        -ms-transform: scale(.5, .5) translateY(5px);/* IE 9 */
+        -webkit-transform: scale(.5, .5) translateY(5px);/* Safari */
+        transform: scale(.5, .5) translateY(5px);
     }
     100% {
         opacity: .2;
-        -ms-transform: scale(1, 1);/* IE 9 */
-        -webkit-transform: scale(1, 1);/* Safari */
-        transform: scale(1, 1);
+        -ms-transform: scale(.5, .5) translateY(5px);/* IE 9 */
+        -webkit-transform: scale(.5, .5) translateY(5px);/* Safari */
+        transform: scale(.5, .5) translateY(5px);
     }
+}
+.dot{
+    height: 15px;
+    width: 15px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 10px;
 }
 .loading span{
     animation-name: grow;
-    animation-duration: 1.4s;
+    animation-duration: 1.3s;
     animation-iteration-count: infinite;
     animation-fill-mode: both;
 
 }
 .loading span:nth-child(2){
+    animation-delay: .1s;
+}
+.loading span:nth-child(3){
     animation-delay: .2s;
+}
+.loading span:nth-child(4){
+    animation-delay: .3s;
+}
+.loading span:nth-child(5){
+    animation-delay: .4s;
 }
