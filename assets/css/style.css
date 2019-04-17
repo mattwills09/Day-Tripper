@@ -44,12 +44,19 @@ body, html{
 
     border-color: #ff0c6c;
 }
+.orange{
+    /* background: #ff9328; */
+    background: none;
+    height: 75px;
+}
 .city {
     font-size: 16pt;
     text-decoration: underline;
 }
 #logo{
     color: #fff;
+    font-weight: bold;
+     font-size: 1.5em;
 }
 .warning {
     color: red;
