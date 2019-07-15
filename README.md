@@ -1,8 +1,32 @@
 # Day-Tripper
+___
 
-The yelp-cat-search will use three arrays to find the appropriate searh categories to pass to the yelp api.
-The first array simply consists of activy setting categories, i.e. indooor, outdor, of both.
-Based of the selected activity setting an array is searched for broad ranges of categories appropriate to the selected setting, i.e. Arts/Entertainment, Museums.
-A third array links the selected category to the relevant search search terms defined in the yelp API, i.e.  "artmuseum", "planetarium".
+Day Tripper is an app that makes visiting a new city, making last minute plans, or looking for places to eat, things to do, or sights to visit in any city in the world a breeze, providing recommended activities based on location and live weather.
 
-The app is built initially to list the final yelp search terms on a web page. In the end the code is expected to be incorporated into the Day Tripper app and the yelp API calls used for it.
+The application is very easy to use, with users able to log into the app using Firebase's login fuctionality, and then entering their zip code.  From there, they are directed to the home page, where the current weather is shown for their location from an AJAX call to the OpenWeather API, and a suggestion is given as to what clothing they may need for the rest of the day, and also what activities would be suggested with the forecast.  After the user selects what category of activities they are interested in, another AJAX call is used to the Yelp API, and displays the results with all relevant information.  The user can then save shops or places they are interested in to their own personal list, and that can be saved or shared with their friends and family, or saved for later in the day.
+
+___
+
+## Technologies Used
+
+* [HTML5]
+* [CSS3]
+* [JavaScript]
+* [jQuery]
+* [Bootstrap]
+* [Express JS]
+* [AJAX]
+* [Firebase](https://mongoosejs.com/) - Elegant mongoDB object modeling for Node.js
+* [OpenWeatherMap API](https://openweathermap.org/api) - Weather API Used
+* [Yelp API](https://www.yelp.com/developers) - Yelp API Used
+* [Hosted on GitHub](https://mattwills09.github.io/Day-Tripper/)
+___
+
+## Authors
+
+* **Matt Williams** - *Initial work* - [M Williams](https://mattwills09.github.io/portfolio.html)
+* **Kira Williams**
+* **Jen Ginelli**
+* **Al Robinson**
+
+See also the list of [contributors](https://github.com/mattwills09/Day-Tripper/graphs/contributors) who helped participate in this project and made it beautiful.
